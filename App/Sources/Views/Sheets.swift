@@ -330,7 +330,7 @@ struct ShareCard: View {
             HStack(spacing: 0) {
                 ForEach(0...c.stationCount, id: \.self) { i in
                     let state: StopState = i == c.stationCount ? .terminal(solved: journey.isCaseSolved(c))
-                        : (journey.arrival(c.id, i).map { $0.isOnTime ? .onTime : .late } ?? .open)
+                        : (journey.arrival(c.id, i).map { $0.isOnTime ? StopState.onTime : StopState.late } ?? StopState.open)
                     StationDot(state: state, size: 14)
                     if i < c.stationCount {
                         Rectangle().fill(journey.arrival(c.id, i) != nil ? Theme.deep : Theme.line).frame(height: 2)

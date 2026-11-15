@@ -142,7 +142,7 @@ struct FinaleView: View {
         Panel {
             VStack(alignment: .leading, spacing: 10) {
                 Eyebrow(text: tr("集めた手がかり", "Your clues"))
-                ForEach(model.journey.clues(c), id: \.index) { clue in
+                ForEach(model.journey.clues(c)) { clue in
                     HStack(alignment: .top, spacing: 10) {
                         StationDot(state: model.journey.arrival(c.id, clue.index)?.isOnTime == true ? .onTime : .late, size: 12)
                             .padding(.top, 3)

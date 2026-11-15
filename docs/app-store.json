@@ -1,21 +1,21 @@
 {
   "_doc": "App Store Connect に API で入れる情報（.github/workflows/asc.yml の metadata が読む）。文字数：name・subtitle 30、keywords 100（カンマ区切り）、promotionalText 170、description 4000。カテゴリの ID は EDUCATION・PRODUCTIVITY・UTILITIES・LIFESTYLE・HEALTH_AND_FITNESS など。審査への提出と App プライバシーの申告は本人が行う。",
   "locale": "ja",
-  "name": "",
-  "subtitle": "",
-  "primaryCategory": "",
-  "secondaryCategory": "",
+  "name": "ひと駅なぞとき：通勤2分の謎解き",
+  "subtitle": "一駅で一問、1週間で1つの事件",
+  "primaryCategory": "GAMES",
+  "secondaryCategory": "ENTERTAINMENT",
   "supportUrl": "https://github.com/enludus-daily/app-20261115-one-stop-riddle/issues",
   "privacyPolicyUrl": "https://github.com/enludus-daily/app-20261115-one-stop-riddle/blob/main/PRIVACY.md",
-  "keywords": "",
-  "promotionalText": "",
-  "description": "",
-  "whatToTest": "",
+  "keywords": "謎解き,なぞなぞ,暗号,推理,ミステリー,通勤,電車,脳トレ,パズル,ひまつぶし,オフライン,論理",
+  "promotionalText": "だらだらスマホの代わりに、一駅2分の謎。解くたびに物語が進み、1週間で1つの事件が解ける。音なし・通信なし・片手で。",
+  "description": "通勤・通学の一駅ぶん、だらだらスマホの代わりに謎をひとつ。\n\n■ 一駅で、ひとつの謎\n暗号・図形・論理・ひらめき・路線図。4つの選択肢から選ぶだけなので、揺れる電車でも片手で解けます。2分以内・ヒントなし・まちがいなしで「定刻着」。\n\n■ 1週間で1つの事件\n解くたびに物語の場面と手がかりが開きます。朝の便と夕の便に1駅ずつ、10駅で手がかりがそろったら、終点で4つの中から真相を選びます。\n\n■ だらだらしない区切り\n1駅解いたら「今日はここまで。次は夕方の便」。無限に続けさせません（設定で区切りをはずすこともできます）。\n\n■ 路線図が積み上がる\n解いた駅は定刻か遅れかで丸の色が変わり、手がかりが路線図に並びます。解いた駅は練習で解き直せます。答えの見えない路線図を画像で共有できます。\n\n■ 音なし・通信なし\n効果音は最初からオフ。通信せず、記録はiPhoneの中だけに保存します。広告もありません。\n\n■ 中身\n・3つの事件（時計台の手紙／七番線の落とし物／時刻表にない電車）\n・30駅の謎と3つの終点。日本語と英語は別々に作っています（言葉遊びは言語ごとに別の問題）\n・3段階のヒント（答えをすぐには見せません）\n\n■ Pro（買い切り・家族共有）\n事件1はすべて無料。事件2・3の最初の3駅も無料です。Proで、事件2・3の残り14駅と終点、すべての駅のヒントの3段目、最速の記録が使えます。",
+  "whatToTest": "起動 → 3ページの案内 → 事件1の路線図で「次の駅へ」→ 謎を解く（ヒント・まちがい・正解）→ 着いた画面（定刻/遅れ・物語の場面）→ 「今日はここまで」になること。設定で「一駅ごとに区切る」をオフにすると続けて乗れます。事件1の10駅を解くと終点で真相を選べ、そのあとProの案内が1回出ます。事件2・3は4駅目からPro（サンドボックスで購入と復元）。",
   "en-US": {
-    "name": "",
-    "subtitle": "",
-    "keywords": "",
-    "promotionalText": "",
-    "description": ""
+    "name": "One Stop Riddles: Commute",
+    "subtitle": "A riddle a stop, a case a week",
+    "keywords": "riddles,puzzle,cipher,logic,mystery,detective,commute,train,brain,offline,whodunit,daily",
+    "promotionalText": "Swap the endless scroll for a two-minute riddle. Every answer moves the story one stop—solve a whole mystery in a week. Silent, offline, one-handed.",
+    "description": "One stop on the train, one riddle—instead of another mindless scroll.\n\nONE STOP, ONE RIDDLE\nCiphers, figures, logic, insight and route maps. Just pick one of four answers, so it works one-handed on a swaying train. Solve within two minutes with no hints and no misses to arrive “On time.”\n\nA CASE A WEEK\nEach answer opens a scene and a clue. One stop each morning and evening; after ten stops you have every clue—then name the truth at the terminus.\n\nA HEALTHY STOP\nSolve a stop and you're done for this ride: “Next stop opens this evening.” No infinite feed. (You can turn pacing off in Settings.)\n\nA ROUTE MAP THAT GROWS\nSolved stops fill in—dark for on time, light for late—and your clues line up along the map. Replay any solved stop for practice. Share a spoiler-free route map image.\n\nSILENT AND OFFLINE\nSound is off by default. No network, no ads; your records stay on your iPhone.\n\nINSIDE\n• 3 cases: The Clock Tower Letter, Lost on Platform 7, The Train Not on the Timetable\n• 30 riddles and 3 finales, written separately in English and Japanese (wordplay is its own puzzle in each language)\n• 3-step hints that never just give the answer away\n\nPRO (one-time, Family Sharing)\nCase 1 is completely free, plus the first 3 stops of cases 2 and 3. Pro unlocks the remaining 14 stops and both finales, the third hint on every stop, and fastest-time records."
   }
 }

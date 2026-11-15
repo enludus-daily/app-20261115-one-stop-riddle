@@ -138,9 +138,9 @@ struct Journey: Codable, Equatable, Sendable {
     }
 
     /// 開いた手がかり（駅の順）
-    func clues(_ c: MysteryCase) -> [(index: Int, text: String)] {
+    func clues(_ c: MysteryCase) -> [Clue] {
         (0..<c.stationCount).compactMap { i in
-            arrival(c.id, i) == nil ? nil : (i, c.riddles[i].text.clue)
+            arrival(c.id, i) == nil ? nil : Clue(index: i, text: c.riddles[i].text.clue)
         }
     }
 
@@ -171,4 +171,11 @@ struct Journey: Codable, Equatable, Sendable {
     func fastestSeconds(_ c: MysteryCase) -> Int? {
         (0..<c.stationCount).compactMap { arrival(c.id, $0)?.seconds }.min()
     }
+}
+
+/// 開いた手がかり
+struct Clue: Identifiable, Equatable, Sendable {
+    let index: Int
+    let text: String
+    var id: Int { index }
 }
