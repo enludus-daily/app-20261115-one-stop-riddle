@@ -2,6 +2,7 @@ import SwiftUI
 
 /// ホーム：今の事件の路線図。下に「次の駅へ」を固定する
 struct HomeView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     @Environment(\.horizontalSizeClass) private var sizeClass
 
@@ -76,15 +77,15 @@ struct HomeView: View {
                 // 発車標の 1 行：便・日付・連続
                 HStack(spacing: 8) {
                     Text(model.slot.label)
-                        .foregroundStyle(Theme.led)
-                        .shadow(color: Theme.glow, radius: 3)
+                        .foregroundStyle(Theme.line(lineMark))
+                        .shadow(color: Theme.glow(lineMark), radius: 3)
                     Text(Clock.day(model.currentDate))
                         .foregroundStyle(Theme.dim)
                     let streak = model.journey.streak(at: model.currentDate, calendar: model.calendar)
                     if streak > 0 {
                         Text(trf("%d日連続", "%d-DAY STREAK", streak))
                             .monospacedDigit()
-                            .foregroundStyle(Theme.led)
+                            .foregroundStyle(Theme.line(lineMark))
                     }
                 }
                 .font(Theme.label(11))
@@ -188,8 +189,8 @@ struct HomeView: View {
                 .font(Theme.board(22, .heavy))
                 .monospacedDigit()
                 .contentTransition(.numericText())
-                .foregroundStyle(Theme.led)
-                .shadow(color: Theme.glow, radius: 4)
+                .foregroundStyle(Theme.line(lineMark))
+                .shadow(color: Theme.glow(lineMark), radius: 4)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
             Text(unit.uppercased())

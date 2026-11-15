@@ -30,6 +30,8 @@ struct RootView: View {
         }
         .animation(.easeOut(duration: 0.35), value: model.onboarded)
         .environment(model)
+        // 主の色＝いまの事件の路線の色
+        .environment(\.lineMark, model.current.mark)
         // 夜の地下鉄の駅が世界。発車標の光と駅名標の明かりが主役なので、画面はダークに固定する
         .preferredColorScheme(.dark)
         .fullScreenCover(item: $model.cover) { cover in
@@ -41,6 +43,7 @@ struct RootView: View {
             }
             .environment(model)
             .environment(\.locale, Lang.locale)
+            .environment(\.lineMark, coverMark(cover, model))
             .preferredColorScheme(.dark)
             .accessibilityHidden(model.activeSheet != nil)
         }
@@ -54,6 +57,7 @@ struct RootView: View {
             }
             .environment(model)
             .environment(\.locale, Lang.locale)
+            .environment(\.lineMark, sheetMark(sheet, model))
             .preferredColorScheme(.dark)
         }
         // 手応えの表（README）：押す・正解・定刻・まちがい・事件解決
@@ -68,6 +72,24 @@ struct RootView: View {
             if phase == .active && !model.frozen { model.now = Date() }
         }
         .environment(\.locale, Lang.locale)
+    }
+}
+
+/// 全画面の場面の路線（謎はいま乗っている事件、終点はその事件）
+@MainActor
+private func coverMark(_ cover: Cover, _ model: AppModel) -> String {
+    switch cover {
+    case .ride: model.rideCase?.mark ?? model.current.mark
+    case .finale(let id): Library.mysteryCase(id)?.mark ?? model.current.mark
+    }
+}
+
+/// シートの路線（共有はその事件、ほかはいまの事件）
+@MainActor
+private func sheetMark(_ sheet: ActiveSheet, _ model: AppModel) -> String {
+    switch sheet {
+    case .share(let id): Library.mysteryCase(id)?.mark ?? model.current.mark
+    default: model.current.mark
     }
 }
 

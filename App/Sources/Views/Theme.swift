@@ -3,8 +3,10 @@ import SwiftUI
 // 見た目の決まり（app-quality-bar の look.md）。色・書体・角丸・余白・影はここだけで決める。
 // 世界：夜の地下鉄の駅とミステリー（2026-11-16 作り直し）。
 // - 地は夜のホームの暗い紺（画面はダークに固定。発車標の光と駅名標の明かりが主役のため）
-// - 光るものはアンバーの発車標だけ（led の 5 段階）。主なボタン・いまの電車・数字の表示
-// - 路線の色は事件ごと（M 青・Y 紅・K 緑）。帯・線路・駅ナンバリングの輪だけに使う
+// - 主の色は路線の色（事件ごとに 1 色：M 青・Y 紅・K 緑）。帯・線路・駅ナンバリング・発車標の光る文字・主なボタンの帯
+//   画面の中では \.lineMark（いまの事件の路線）から引く。黄色・アンバーは使わない（2026-11-16 監督のレビュー：
+//   しゃがんで建てる の黄と黒に見えるため）
+// - 主なボタンは駅の案内板：白い板に路線の色の帯
 // - 手がかり・物語・真相は「事件の資料」のクラフト紙の紙片（file の段階）
 // - 遅れ・まちがいは小さな赤い点だけ（late）
 enum Theme {
@@ -16,13 +18,8 @@ enum Theme {
     static let text = Color(hex: 0xECF0F3)       // 文字（真っ白にしない）
     static let dim = Color(hex: 0x8B9AA7)        // 補助の文字
 
-    // 発車標の光（アンバー）の 5 段階：accent / soft / deep / 地 / 飾り（光のにじみ）
-    static let led = Color(hex: 0xFFB43C)
-    static let ledSoft = Color(hex: 0x3B2B12)
-    static let ledDeep = Color(hex: 0xD98F1A)
-    static let ledInk = Color(hex: 0x1A1205)     // アンバーの上の文字
-    static let board = Color(hex: 0x05080A)      // 発車標の黒い地
-    static let glow = Color(hex: 0xFFB43C).opacity(0.45)
+    // 発車標の黒い地（文字は路線の色で光らせる）
+    static let board = Color(hex: 0x05080A)
 
     // 駅名標（裏から照らされた白い板）
     static let sign = Color(hex: 0xF3F5F6)
@@ -39,7 +36,7 @@ enum Theme {
     // 遅れ・まちがい（小さな点と文字だけ）
     static let late = Color(hex: 0xFF6A5C)
 
-    /// 路線の色（事件ごと）。帯・線路・駅ナンバリングの輪に使う
+    /// 路線の色（事件ごと）。主の色。帯・線路・駅ナンバリング・光る文字・ボタンの帯に使う
     static func line(_ mark: String) -> Color {
         switch mark {
         case "Y": Color(hex: 0xE5578A)   // ゆうなぎ線：夕なぎの紅
@@ -66,6 +63,10 @@ enum Theme {
     static func body(_ size: CGFloat = 15, _ weight: Font.Weight = .regular) -> Font { .system(size: size, weight: weight) }
 
     // 角丸の段階（駅の設備は角ばっている）
+    /// 路線の色の 5 段階：accent（路線の色）/ soft（暗い地の上の淡い面）/ deep（白い板の上の文字）/ 地 / 飾り（にじみ）
+    static func glow(_ mark: String) -> Color { line(mark).opacity(0.45) }
+    static func lineSoft(_ mark: String) -> Color { line(mark).opacity(0.18) }
+
     static let radiusS: CGFloat = 4
     static let radiusM: CGFloat = 10
     static let radiusL: CGFloat = 14
@@ -73,6 +74,11 @@ enum Theme {
     // 線
     static let hairline: CGFloat = 1
     static let rail: CGFloat = 6
+}
+
+extension EnvironmentValues {
+    /// いまの画面の事件の路線（M・Y・K）。主の色はここから決まる
+    @Entry var lineMark: String = "M"
 }
 
 extension Color {
@@ -134,37 +140,51 @@ struct PressStyle: ButtonStyle {
     }
 }
 
-/// 主なボタン：発車標のアンバーの光。黒い太字、下辺だけ厚い（押しボタンの厚み）
+/// 主なボタン：駅の案内板。白い板に、左に路線の色の帯と右に矢印。下辺だけ厚い（押しボタンの厚み）
 struct PrimaryButtonLabel: View {
+    @Environment(\.lineMark) private var lineMark
     let title: String
     var subtitle: String? = nil
     var enabled = true
     var body: some View {
         let shape = RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous)
-        VStack(spacing: 2) {
-            Text(title)
-                .font(Theme.gothic(16, .bold))
-                .lineLimit(1)
-                .minimumScaleFactor(0.7)
-            if let subtitle {
-                Text(subtitle)
-                    .font(Theme.body(11, .medium))
+        let color = Theme.line(lineMark)
+        HStack(spacing: 0) {
+            Color.clear.frame(width: 10)
+            VStack(spacing: 2) {
+                Text(title)
+                    .font(Theme.gothic(16, .heavy))
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
-                    .opacity(0.8)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(Theme.body(11, .medium))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .foregroundStyle(enabled ? Theme.signSub : Theme.dim)
+                }
             }
+            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity)
+            Image(systemName: "arrowtriangle.right.fill")
+                .font(.system(size: 11))
+                .foregroundStyle(enabled ? color : .clear)
+                .padding(.trailing, 14)
         }
-        .padding(.horizontal, 12)
-        .foregroundStyle(enabled ? Theme.ledInk : Theme.dim)
+        .foregroundStyle(enabled ? Theme.signInk : Theme.dim)
         .frame(maxWidth: .infinity, minHeight: 56)
         .background(
             ZStack {
-                shape.fill(enabled ? Theme.ledDeep : Theme.platform).offset(y: 3)
-                shape.fill(enabled ? Theme.led : Theme.platform)
+                shape.fill(enabled ? Color(hex: 0x9AA5AE) : Theme.platform).offset(y: 3)
+                shape.fill(enabled ? Theme.sign : Theme.platform)
+                    .overlay(alignment: .leading) {
+                        Rectangle().fill(enabled ? color : Theme.rule).frame(width: 10)
+                    }
+                    .clipShape(shape)
             }
         )
         .overlay(shape.strokeBorder(enabled ? .clear : Theme.rule, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
-        .shadow(color: enabled ? Theme.glow : .clear, radius: 14, y: 2)
+        .shadow(color: enabled ? Theme.sign.opacity(0.12) : .clear, radius: 14, y: 2)
         .padding(.bottom, 3)
     }
 }

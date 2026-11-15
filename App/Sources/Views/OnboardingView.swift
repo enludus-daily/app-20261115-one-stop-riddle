@@ -2,6 +2,7 @@ import SwiftUI
 
 /// 最初の案内（3 ページ）。動く見本：電車が駅から駅へ 1 つずつ進む（1 回だけの動き）
 struct OnboardingView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var page = 0
@@ -30,7 +31,7 @@ struct OnboardingView: View {
                 sampleLine
                     .frame(height: 70)
                 VStack(alignment: .leading, spacing: 12) {
-                    Eyebrow(text: pages[page].eyebrow, color: Theme.led)
+                    Eyebrow(text: pages[page].eyebrow, color: Theme.line(lineMark))
                     Text(pages[page].title)
                         .font(Theme.gothic(32, .heavy))
                         .foregroundStyle(Theme.text)
@@ -51,7 +52,7 @@ struct OnboardingView: View {
                 VStack(spacing: 14) {
                     HStack(spacing: 6) {
                         ForEach(0..<pages.count, id: \.self) { i in
-                            RoundedRectangle(cornerRadius: 1).fill(i == page ? Theme.led : Theme.rule)
+                            RoundedRectangle(cornerRadius: 1).fill(i == page ? Theme.line(lineMark) : Theme.rule)
                                 .frame(width: i == page ? 22 : 8, height: 4)
                         }
                     }
@@ -121,8 +122,8 @@ struct OnboardingView: View {
                 .background(Theme.line("M"))
             Text(row.1)
                 .font(Theme.board(15, .heavy))
-                .foregroundStyle(Theme.led)
-                .shadow(color: Theme.glow, radius: 4)
+                .foregroundStyle(Theme.line(lineMark))
+                .shadow(color: Theme.glow(lineMark), radius: 4)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
                 .id(page)

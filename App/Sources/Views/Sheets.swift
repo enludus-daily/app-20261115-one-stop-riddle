@@ -4,6 +4,7 @@ import SwiftUI
 // MARK: - 設定
 
 struct SettingsView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
 
     var body: some View {
@@ -67,12 +68,12 @@ struct SettingsView: View {
                 }
             }
         }
-        .tint(Theme.led)
+        .tint(Theme.line(lineMark))
     }
 
     private func section<Content: View>(_ title: String, @ViewBuilder _ content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            Eyebrow(text: title, color: Theme.led)
+            Eyebrow(text: title, color: Theme.line(lineMark))
             Panel(padding: 14) {
                 VStack(alignment: .leading, spacing: 12) { content() }
             }
@@ -96,8 +97,8 @@ struct SettingsView: View {
         HStack {
             Text(title).font(Theme.gothic(15, .semibold)).foregroundStyle(Theme.text)
             Spacer()
-            Text(verbatim: value).font(Theme.board(17, .heavy)).monospacedDigit().foregroundStyle(Theme.led)
-                .shadow(color: Theme.glow, radius: 3)
+            Text(verbatim: value).font(Theme.board(17, .heavy)).monospacedDigit().foregroundStyle(Theme.line(lineMark))
+                .shadow(color: Theme.glow(lineMark), radius: 3)
         }
     }
 
@@ -115,6 +116,7 @@ struct SettingsView: View {
 // MARK: - Pro
 
 struct PaywallView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     let reason: PaywallReason
     @State private var busy = false
@@ -125,7 +127,7 @@ struct PaywallView: View {
             NightBackground()
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    Eyebrow(text: "One Stop Riddles Pro", color: Theme.led)
+                    Eyebrow(text: "One Stop Riddles Pro", color: Theme.line(lineMark))
                     Text(headline)
                         .font(Theme.gothic(28, .heavy))
                         .foregroundStyle(Theme.text)
@@ -250,8 +252,8 @@ struct PaywallView: View {
         HStack(alignment: .top, spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(Theme.led)
-                .shadow(color: Theme.glow, radius: 4)
+                .foregroundStyle(Theme.line(lineMark))
+                .shadow(color: Theme.glow(lineMark), radius: 4)
                 .frame(width: 36, height: 36)
                 .background(RoundedRectangle(cornerRadius: Theme.radiusS, style: .continuous).fill(Theme.board))
                 .overlay(RoundedRectangle(cornerRadius: Theme.radiusS, style: .continuous).strokeBorder(Theme.rule, lineWidth: 1))
@@ -267,6 +269,7 @@ struct PaywallView: View {
 // MARK: - 共有（ネタばれなし）
 
 struct ShareView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     let caseID: String
 
@@ -276,7 +279,7 @@ struct ShareView: View {
         ZStack {
             NightBackground()
             VStack(spacing: 18) {
-                Eyebrow(text: tr("答えの見えない路線図", "A spoiler-free route map"), color: Theme.led)
+                Eyebrow(text: tr("答えの見えない路線図", "A spoiler-free route map"), color: Theme.line(lineMark))
                     .padding(.top, 4)
                 card
                     .frame(width: 300, height: 400)
@@ -326,6 +329,7 @@ struct ShareView: View {
 }
 
 struct ShareCard: View {
+    @Environment(\.lineMark) private var lineMark
     let mysteryCase: MysteryCase
     let journey: Journey
 
@@ -359,8 +363,8 @@ struct ShareCard: View {
                     .font(Theme.board(68, .heavy))
                     .kerning(-3)
                     .monospacedDigit()
-                    .foregroundStyle(Theme.led)
-                    .shadow(color: Theme.glow, radius: 8)
+                    .foregroundStyle(Theme.line(lineMark))
+                    .shadow(color: Theme.glow(lineMark), radius: 8)
                 Text(tr("/ 10 駅", "/ 10 STOPS"))
                     .font(Theme.board(15, .bold))
                     .foregroundStyle(Theme.dim)
@@ -373,7 +377,7 @@ struct ShareCard: View {
                 }
             }
             .font(Theme.label(11))
-            .foregroundStyle(Theme.led)
+            .foregroundStyle(Theme.line(lineMark))
             LineBand(mark: c.mark, height: 5)
             HStack {
                 Text(tr("ひと駅なぞとき", "One Stop Riddles")).font(Theme.gothic(13, .heavy))

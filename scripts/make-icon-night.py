@@ -2,7 +2,7 @@
 """ひと駅なぞとき のアイコン（夜の地下鉄の駅）。1024x1024、透過なし PNG。
 
 暗い紺の地にタイルの目地、路線の色（みなと線の青）の帯、駅ナンバリングの記号（白い丸に青い太い輪）の中に「?」、
-上に発車標のアンバーの光の点。Pillow だけで描く。
+上に発車標の青白い光の点。Pillow だけで描く。
   python3 scripts/make-icon-night.py
 """
 import os
@@ -17,7 +17,7 @@ RULE = (32, 43, 54)
 LINE = (47, 157, 226)
 SIGN = (243, 245, 246)
 INK = (17, 24, 32)
-LED = (255, 180, 60)
+LED = (150, 210, 250)  # 路線の色（青）を明るくした光。黄色は使わない
 
 FONTS = ["/usr/share/fonts/opentype/inter/Inter-Black.otf", "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"]
 
@@ -49,7 +49,7 @@ by = 600
 d.rectangle([0, by - 8, S, by + 92], fill=SIGN)
 d.rectangle([0, by, S, by + 84], fill=LINE)
 
-# 発車標の光（アンバーの点の列）をにじませる
+# 発車標の光（青白い点の列）をにじませる
 glow = Image.new("RGB", (S, S), (0, 0, 0))
 g = ImageDraw.Draw(glow)
 for i in range(7):

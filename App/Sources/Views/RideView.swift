@@ -2,6 +2,7 @@ import SwiftUI
 
 /// 1 駅の謎。下に 4 つの大きな選択肢とヒントを固定（片手・揺れる電車で押しやすく）
 struct RideView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     @Environment(\.horizontalSizeClass) private var sizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -54,10 +55,10 @@ struct RideView: View {
                         Text(riddle.kind.label.uppercased())
                             .font(Theme.label(10))
                             .kerning(1.4)
-                            .foregroundStyle(Theme.ledInk)
+                            .foregroundStyle(Color.white)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 3)
-                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
+                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.line(lineMark)))
                         if ride.practice {
                             Eyebrow(text: tr("練習 · 記録は変わりません", "Practice · records unchanged"), color: Theme.dim)
                         }
@@ -74,9 +75,9 @@ struct RideView: View {
                                 HStack(alignment: .top, spacing: 8) {
                                     Text(verbatim: "\(i + 1)")
                                         .font(Theme.board(12, .heavy))
-                                        .foregroundStyle(Theme.ledInk)
+                                        .foregroundStyle(Color.white)
                                         .frame(width: 20, height: 20)
-                                        .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
+                                        .background(RoundedRectangle(cornerRadius: 3).fill(Theme.line(lineMark)))
                                     Text(text.hints[i])
                                         .font(Theme.body(14, .medium))
                                         .foregroundStyle(Theme.fileInk)
@@ -163,7 +164,7 @@ struct RideView: View {
                         HStack(spacing: 8) {
                             Text(verbatim: ["A", "B", "C", "D"][i % 4])
                                 .font(Theme.board(11, .heavy))
-                                .foregroundStyle(wrong ? Theme.dim : Theme.led)
+                                .foregroundStyle(wrong ? Theme.dim : Theme.line(lineMark))
                             Text(text.choices[i])
                                 .font(Theme.gothic(text.choices[i].count > 10 ? 13 : 16, .bold))
                                 .multilineTextAlignment(.leading)
@@ -199,16 +200,16 @@ struct RideView: View {
                     if ride.hintsShown == 2 && !model.isPro {
                         Text(verbatim: "PRO")
                             .font(Theme.label(9))
-                            .foregroundStyle(Theme.ledInk)
+                            .foregroundStyle(Color.white)
                             .padding(.horizontal, 5).padding(.vertical, 2)
-                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
+                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.line(lineMark)))
                     }
                     Spacer()
                     Text(tr("1つにつき1分遅れ", "+1 min each"))
                         .font(Theme.label(10))
                         .foregroundStyle(Theme.dim)
                 }
-                .foregroundStyle(Theme.led)
+                .foregroundStyle(Theme.line(lineMark))
                 .padding(.horizontal, 14)
                 .frame(maxWidth: .infinity, minHeight: 44)
                 .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.rule, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
@@ -231,6 +232,7 @@ struct Shake: GeometryEffect {
 
 /// 着いた：定刻か遅れか（発車標の表示）、答えのわけ、開いた物語の場面（事件の資料）
 struct ArrivalPanel: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     let mysteryCase: MysteryCase
     let ride: RideState
@@ -241,7 +243,7 @@ struct ArrivalPanel: View {
 
     var body: some View {
         let text = riddle.text
-        let color = arrival.isOnTime ? Theme.led : Theme.late
+        let color = arrival.isOnTime ? Theme.line(lineMark) : Theme.late
         VStack(alignment: .leading, spacing: 16) {
             // 発車標：「定刻着」/「◯分遅れ」と所要時間が光る
             VStack(alignment: .leading, spacing: 10) {
@@ -297,7 +299,7 @@ struct ArrivalPanel: View {
                     .foregroundStyle(Theme.fileInk)
                     .padding(.horizontal, 10).padding(.vertical, 6)
                     // 手がかりは、資料に引いたマーカー
-                    .background(Rectangle().fill(Theme.led.opacity(0.45)))
+                    .background(Rectangle().fill(Theme.line(lineMark).opacity(0.45)))
                 }
             }
             .padding(.top, 6)

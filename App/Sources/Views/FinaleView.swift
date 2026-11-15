@@ -2,6 +2,7 @@ import SwiftUI
 
 /// 終点：集めた手がかりから、4 つのうち真相を 1 つ選ぶ
 struct FinaleView: View {
+    @Environment(\.lineMark) private var lineMark
     @Environment(AppModel.self) private var model
     @Environment(\.horizontalSizeClass) private var sizeClass
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -35,8 +36,8 @@ struct FinaleView: View {
                     } else {
                         Text(c.finale.text.q)
                             .font(Theme.gothic(22, .bold))
-                            .foregroundStyle(Theme.led)
-                            .shadow(color: Theme.glow, radius: 5)
+                            .foregroundStyle(Theme.line(lineMark))
+                            .shadow(color: Theme.glow(lineMark), radius: 5)
                             .fixedSize(horizontal: false, vertical: true)
                         if !model.finaleWrong.isEmpty {
                             Text(tr("ちがうようです。手がかりをもう一度読んでみましょう。", "Not quite. Read the clues again."))
@@ -115,8 +116,8 @@ struct FinaleView: View {
                         // 容疑者の札：発車標の記号 A〜D
                         Text(verbatim: ["A", "B", "C", "D"][i])
                             .font(Theme.board(17, .heavy))
-                            .foregroundStyle(wrong ? Theme.dim : Theme.led)
-                            .shadow(color: wrong ? .clear : Theme.glow, radius: 4)
+                            .foregroundStyle(wrong ? Theme.dim : Theme.line(lineMark))
+                            .shadow(color: wrong ? .clear : Theme.glow(lineMark), radius: 4)
                             .frame(width: 36, height: 36)
                             .background(RoundedRectangle(cornerRadius: Theme.radiusS).fill(Theme.board))
                         VStack(alignment: .leading, spacing: 2) {

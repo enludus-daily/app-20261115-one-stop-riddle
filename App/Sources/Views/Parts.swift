@@ -2,7 +2,7 @@ import SwiftUI
 
 // 題材の部品：路線図・駅名標・発車標の札・電車・2 分の線路・事件の資料の紙片。どれも自作の Shape / Canvas。
 
-/// 電車（前から見た車両。銀の車体に路線の帯、アンバーの前照灯）
+/// 電車（前から見た車両。銀の車体に路線の帯、白い前照灯）
 struct TrainShape: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
@@ -24,15 +24,15 @@ struct TrainIcon: View {
                 // 路線の帯
                 Rectangle().fill(Theme.line(mark)).frame(height: max(2, size * 0.12))
                 HStack {
-                    Circle().fill(Theme.led).frame(width: size * 0.16)
+                    Circle().fill(Color.white).frame(width: size * 0.16)
                     Spacer()
-                    Circle().fill(Theme.led).frame(width: size * 0.16)
+                    Circle().fill(Color.white).frame(width: size * 0.16)
                 }
             }
             .padding(size * 0.12)
         }
         .frame(width: size * 0.8, height: size)
-        .shadow(color: Theme.glow, radius: size * 0.3)
+        .shadow(color: Theme.glow(mark), radius: size * 0.3)
         .accessibilityHidden(true)
     }
 }
@@ -59,9 +59,10 @@ struct StationDot: View {
                 Circle().strokeBorder(color, lineWidth: max(2, size * 0.16))
                 Circle().fill(Theme.late).frame(width: size * 0.3)
             case .next:
+                // 次の駅：白く光る輪（路線の色のにじみ）
                 Circle().fill(Theme.board)
-                Circle().strokeBorder(Theme.led, lineWidth: max(2.5, size * 0.18))
-                    .shadow(color: Theme.glow, radius: 6)
+                Circle().strokeBorder(Theme.sign, lineWidth: max(2.5, size * 0.18))
+                    .shadow(color: Theme.glow(mark), radius: 6)
             case .open:
                 Circle().fill(Theme.night)
                 Circle().strokeBorder(color.opacity(0.75), lineWidth: max(2, size * 0.14))
@@ -153,10 +154,10 @@ struct RouteMap: View {
                     if state == .next {
                         Text(tr("次の駅", "NEXT"))
                             .font(Theme.label(10))
-                            .foregroundStyle(Theme.ledInk)
+                            .foregroundStyle(Theme.signInk)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
-                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
+                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.sign))
                     }
                 }
                 if !compact, !isLast, model.journey.arrival(c.id, i) != nil {
@@ -197,17 +198,18 @@ struct RouteMap: View {
 
 /// 定刻 / ◯分遅れ（発車標の小さな表示）
 struct ArrivalPill: View {
+    @Environment(\.lineMark) private var lineMark
     let arrival: Arrival
     var small = false
     var body: some View {
         Text(arrival.isOnTime ? tr("定刻", "On time").uppercased() : trf("%d分遅れ", "+%d MIN", arrival.delayMinutes))
             .font(Theme.label(small ? 9 : 11))
             .monospacedDigit()
-            .foregroundStyle(arrival.isOnTime ? Theme.led : Theme.late)
+            .foregroundStyle(arrival.isOnTime ? Theme.line(lineMark) : Theme.late)
             .padding(.horizontal, small ? 5 : 8)
             .padding(.vertical, small ? 2 : 4)
             .background(RoundedRectangle(cornerRadius: 3).fill(Theme.board))
-            .overlay(RoundedRectangle(cornerRadius: 3).strokeBorder((arrival.isOnTime ? Theme.led : Theme.late).opacity(0.4), lineWidth: 1))
+            .overlay(RoundedRectangle(cornerRadius: 3).strokeBorder((arrival.isOnTime ? Theme.line(lineMark) : Theme.late).opacity(0.4), lineWidth: 1))
     }
 }
 
@@ -273,7 +275,7 @@ struct StationSign: View {
     }
 }
 
-/// 発車標の札（図・暗号）。黒い発車標に、めくり式の札を並べ、アンバーの光る文字で 1 語ずつ
+/// 発車標の札（図・暗号）。黒い発車標に、めくり式の札を並べ、路線の色で光る文字で 1 語ずつ
 struct FigureBoard: View {
     let tokens: [String]
     var body: some View {
@@ -294,11 +296,12 @@ struct FigureBoard: View {
     }
 
     struct Tile: View {
+        @Environment(\.lineMark) private var lineMark
         let text: String
         let wide: Bool
         var body: some View {
             let isQuestion = text == "?"
-            let color = isQuestion ? Theme.late : Theme.led
+            let color = isQuestion ? Theme.late : Theme.line(lineMark)
             Text(text)
                 .font(wide ? Theme.gothic(15, .bold) : Theme.board(22, .heavy))
                 .monospacedDigit()
@@ -366,13 +369,14 @@ struct FlowLayout: Layout {
 
 /// 2 分の線路：発車標の帯の上を小さな電車が進む。残り時間は光る数字。2 分を過ぎると赤
 struct RailTimer: View {
+    @Environment(\.lineMark) private var lineMark
     let elapsed: Int
     var mark: String = "M"
     var body: some View {
         let target = Arrival.targetSeconds
         let progress = min(1, Double(elapsed) / Double(target))
         let late = elapsed > target
-        let color = late ? Theme.late : Theme.led
+        let color = late ? Theme.late : Theme.line(lineMark)
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
                 Text(late ? tr("遅れ", "LATE") : tr("定刻まで", "ON TIME IN"))
