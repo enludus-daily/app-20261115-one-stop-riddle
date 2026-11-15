@@ -12,31 +12,35 @@ struct FinaleView: View {
         let c = Library.mysteryCase(caseID) ?? model.current
         let solved = model.journey.isCaseSolved(c)
         ZStack {
-            TrackBackground()
+            NightBackground()
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     VStack(alignment: .leading, spacing: 6) {
                         HStack(spacing: 8) {
-                            LineMark(mark: c.mark, size: 22)
-                            Eyebrow(text: c.text.line, color: Theme.deep)
+                            LineMark(mark: c.mark, size: 24)
+                            Eyebrow(text: c.text.line, color: Theme.line(c.mark))
                         }
+                        // 終点の駅名標の帯
                         Text(c.text.terminal)
-                            .font(Theme.serif(30, .semibold))
-                            .foregroundStyle(Theme.ink)
+                            .font(Theme.gothic(32, .heavy))
+                            .foregroundStyle(Theme.text)
+                        LineBand(mark: c.mark, height: 6)
                         Text(c.text.title)
-                            .font(Theme.serif(16))
-                            .foregroundStyle(Theme.sub)
+                            .font(Theme.gothic(16, .semibold))
+                            .foregroundStyle(Theme.dim)
                     }
                     if solved {
                         truth(c)
                             .transition(.opacity.combined(with: .scale(scale: 0.96)))
                     } else {
                         Text(c.finale.text.q)
-                            .font(Theme.serif(22, .semibold))
-                            .foregroundStyle(Theme.ink)
+                            .font(Theme.gothic(22, .bold))
+                            .foregroundStyle(Theme.led)
+                            .shadow(color: Theme.glow, radius: 5)
+                            .fixedSize(horizontal: false, vertical: true)
                         if !model.finaleWrong.isEmpty {
                             Text(tr("ちがうようです。手がかりをもう一度読んでみましょう。", "Not quite. Read the clues again."))
-                                .font(.system(size: 13))
+                                .font(Theme.body(13, .medium))
                                 .foregroundStyle(Theme.late)
                         }
                     }
@@ -65,9 +69,9 @@ struct FinaleView: View {
                     .accessibilityIdentifier("main.closeFinale")
                     Spacer()
                 }
-                .foregroundStyle(Theme.deep)
+                .foregroundStyle(Theme.text)
                 .padding(.horizontal, 12)
-                .background(Theme.paper.opacity(0.96))
+                .background(Theme.night.opacity(0.96))
             }
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 if solved {
@@ -84,7 +88,7 @@ struct FinaleView: View {
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 8)
-                    .background(Theme.paper.opacity(0.96).ignoresSafeArea())
+                    .background(Theme.night.opacity(0.97).ignoresSafeArea())
                 }
             }
         }
@@ -108,26 +112,36 @@ struct FinaleView: View {
                     }
                 } label: {
                     HStack(spacing: 12) {
+                        // 容疑者の札：発車標の記号 A〜D
                         Text(verbatim: ["A", "B", "C", "D"][i])
-                            .font(Theme.serif(16, .semibold))
-                            .foregroundStyle(wrong ? Theme.sub : Theme.deep)
-                            .frame(width: 34, height: 34)
-                            .background(Circle().fill(wrong ? Theme.mist : Theme.soft))
+                            .font(Theme.board(17, .heavy))
+                            .foregroundStyle(wrong ? Theme.dim : Theme.led)
+                            .shadow(color: wrong ? .clear : Theme.glow, radius: 4)
+                            .frame(width: 36, height: 36)
+                            .background(RoundedRectangle(cornerRadius: Theme.radiusS).fill(Theme.board))
                         VStack(alignment: .leading, spacing: 2) {
                             Text(s.name)
-                                .font(.system(size: 16, weight: .medium))
+                                .font(Theme.gothic(16, .bold))
                                 .strikethrough(wrong, color: Theme.late)
                             Text(s.note)
-                                .font(.system(size: 12))
-                                .foregroundStyle(Theme.sub)
+                                .font(Theme.body(12))
+                                .foregroundStyle(Theme.dim)
                         }
-                        .foregroundStyle(wrong ? Theme.sub : Theme.ink)
+                        .foregroundStyle(wrong ? Theme.dim : Theme.text)
                         Spacer()
+                        if wrong {
+                            Image(systemName: "xmark").font(.system(size: 13, weight: .bold)).foregroundStyle(Theme.late)
+                        }
                     }
                     .padding(12)
-                    .frame(minHeight: 60)
-                    .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(wrong ? Theme.mist : Theme.card))
-                    .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(wrong ? Theme.line : Theme.accent, lineWidth: 1))
+                    .frame(minHeight: 62)
+                    .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.board).offset(y: wrong ? 0 : 3)
+                            RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(wrong ? Theme.night : Theme.platform)
+                        }
+                    )
+                    .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(wrong ? Theme.late.opacity(0.4) : Theme.rule, lineWidth: 1))
                 }
                 .buttonStyle(PressStyle())
                 .modifier(Shake(animatableData: CGFloat(shake[i, default: 0])))
@@ -139,16 +153,16 @@ struct FinaleView: View {
     }
 
     private func clues(_ c: MysteryCase) -> some View {
-        Panel {
+        CaseFileSlip(tilt: -0.6) {
             VStack(alignment: .leading, spacing: 10) {
-                Eyebrow(text: tr("集めた手がかり", "Your clues"))
+                FileHeading(text: tr("事件資料 · 集めた手がかり", "Case file · Your clues"))
                 ForEach(model.journey.clues(c)) { clue in
                     HStack(alignment: .top, spacing: 10) {
-                        StationDot(state: model.journey.arrival(c.id, clue.index)?.isOnTime == true ? .onTime : .late, size: 12)
+                        StationDot(state: model.journey.arrival(c.id, clue.index)?.isOnTime == true ? .onTime : .late, mark: c.mark, size: 12)
                             .padding(.top, 3)
                         Text(clue.text)
-                            .font(.system(size: 13))
-                            .foregroundStyle(Theme.ink)
+                            .font(Theme.body(13, .medium))
+                            .foregroundStyle(Theme.fileInk)
                             .fixedSize(horizontal: false, vertical: true)
                     }
                 }
@@ -160,18 +174,22 @@ struct FinaleView: View {
     private func truth(_ c: MysteryCase) -> some View {
         let tries = model.journey.finales[c.id]?.tries ?? 1
         let suspect = c.finale.text.suspects[c.finale.answer]
-        return Panel(padding: 20) {
+        return CaseFileSlip(tilt: 0.5, padding: 20) {
             VStack(alignment: .leading, spacing: 12) {
-                Eyebrow(text: tr("真相", "The truth"), color: Theme.deep)
+                HStack(alignment: .top) {
+                    FileHeading(text: tr("事件資料 · 真相", "Case file · The truth"))
+                    Spacer()
+                    Stamp(text: tr("解決", "CLOSED"))
+                }
                 Text(suspect.name)
-                    .font(Theme.serif(24, .semibold))
-                    .foregroundStyle(Theme.ink)
+                    .font(Theme.gothic(26, .heavy))
+                    .foregroundStyle(Theme.fileInk)
                 Text(c.finale.text.truth)
-                    .font(.system(size: 15))
+                    .font(Theme.body(15, .medium))
                     .lineSpacing(5)
-                    .foregroundStyle(Theme.ink)
+                    .foregroundStyle(Theme.fileInk)
                     .fixedSize(horizontal: false, vertical: true)
-                Rectangle().fill(Theme.line).frame(height: Theme.hairline)
+                Rectangle().fill(Theme.fileRule).frame(height: 1)
                 HStack(spacing: 18) {
                     figure("\(model.journey.onTimeCount(c))/\(c.stationCount)", tr("定刻", "On time"))
                     figure("\(tries)", tr("推理の回数", "Guesses"))
@@ -186,11 +204,10 @@ struct FinaleView: View {
     private func figure(_ value: String, _ label: String) -> some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(verbatim: value)
-                .font(Theme.serif(22))
+                .font(Theme.board(22, .heavy))
                 .monospacedDigit()
-                .kerning(-0.5)
-                .foregroundStyle(Theme.ink)
-            Eyebrow(text: label)
+                .foregroundStyle(Theme.fileInk)
+            FileHeading(text: label)
         }
     }
 }

@@ -1,37 +1,38 @@
 import SwiftUI
 
-// 題材の部品：路線図・駅名標・発車標の札・電車・2 分の線路。どれも自作の Shape / Canvas。
+// 題材の部品：路線図・駅名標・発車標の札・電車・2 分の線路・事件の資料の紙片。どれも自作の Shape / Canvas。
 
-/// 電車（前から見た小さな車両。窓 2 つと前照灯）
+/// 電車（前から見た車両。銀の車体に路線の帯、アンバーの前照灯）
 struct TrainShape: Shape {
     func path(in rect: CGRect) -> Path {
         var p = Path()
-        p.addRoundedRect(in: rect, cornerSize: CGSize(width: rect.width * 0.32, height: rect.width * 0.32), style: .continuous)
+        p.addRoundedRect(in: rect, cornerSize: CGSize(width: rect.width * 0.28, height: rect.width * 0.28), style: .continuous)
         return p
     }
 }
 
 struct TrainIcon: View {
     var size: CGFloat = 22
+    var mark: String = "M"
     var body: some View {
         ZStack {
-            TrainShape().fill(Theme.train)
-            TrainShape().stroke(Theme.ink.opacity(0.55), lineWidth: 1)
-            VStack(spacing: size * 0.12) {
-                HStack(spacing: size * 0.1) {
-                    RoundedRectangle(cornerRadius: 1.5).fill(Theme.card)
-                    RoundedRectangle(cornerRadius: 1.5).fill(Theme.card)
-                }
-                .frame(height: size * 0.32)
+            TrainShape().fill(Theme.sign)
+            VStack(spacing: size * 0.08) {
+                // 窓
+                RoundedRectangle(cornerRadius: 1.5).fill(Theme.signInk)
+                    .frame(height: size * 0.3)
+                // 路線の帯
+                Rectangle().fill(Theme.line(mark)).frame(height: max(2, size * 0.12))
                 HStack {
-                    Circle().fill(Theme.card).frame(width: size * 0.14)
+                    Circle().fill(Theme.led).frame(width: size * 0.16)
                     Spacer()
-                    Circle().fill(Theme.card).frame(width: size * 0.14)
+                    Circle().fill(Theme.led).frame(width: size * 0.16)
                 }
             }
-            .padding(size * 0.16)
+            .padding(size * 0.12)
         }
         .frame(width: size * 0.8, height: size)
+        .shadow(color: Theme.glow, radius: size * 0.3)
         .accessibilityHidden(true)
     }
 }
@@ -41,38 +42,42 @@ enum StopState: Equatable {
     case onTime, late, next, open, locked, terminal(solved: Bool)
 }
 
-/// 駅の丸（路線図の 1 駅）
+/// 駅の丸（路線図の 1 駅）。路線の色で塗る：定刻＝塗りつぶし、遅れ＝白に赤い点、次＝光る輪、まだ＝輪だけ、鍵＝点線
 struct StationDot: View {
     let state: StopState
+    var mark: String = "M"
     var size: CGFloat = 18
     var body: some View {
+        let color = Theme.line(mark)
         ZStack {
             switch state {
             case .onTime:
-                Circle().fill(Theme.deep)
-                Circle().fill(Theme.card).frame(width: size * 0.36)
+                Circle().fill(color)
+                Circle().fill(Theme.sign).frame(width: size * 0.38)
             case .late:
-                Circle().fill(Theme.accent)
-                Circle().fill(Theme.card).frame(width: size * 0.36)
+                Circle().fill(Theme.sign)
+                Circle().strokeBorder(color, lineWidth: max(2, size * 0.16))
+                Circle().fill(Theme.late).frame(width: size * 0.3)
             case .next:
-                Circle().fill(Theme.card)
-                Circle().strokeBorder(Theme.train, lineWidth: 3)
+                Circle().fill(Theme.board)
+                Circle().strokeBorder(Theme.led, lineWidth: max(2.5, size * 0.18))
+                    .shadow(color: Theme.glow, radius: 6)
             case .open:
-                Circle().fill(Theme.card)
-                Circle().strokeBorder(Theme.accent, lineWidth: 1.5)
+                Circle().fill(Theme.night)
+                Circle().strokeBorder(color.opacity(0.75), lineWidth: max(2, size * 0.14))
             case .locked:
-                Circle().fill(Theme.paper)
-                Circle().strokeBorder(Theme.line, style: StrokeStyle(lineWidth: 1.2, dash: [2, 2]))
+                Circle().fill(Theme.night)
+                Circle().strokeBorder(Theme.dim.opacity(0.6), style: StrokeStyle(lineWidth: 1.4, dash: [2, 2]))
             case .terminal(let solved):
-                RoundedRectangle(cornerRadius: 4, style: .continuous).fill(solved ? Theme.deep : Theme.card)
-                RoundedRectangle(cornerRadius: 4, style: .continuous).strokeBorder(Theme.deep, lineWidth: 1.5)
+                RoundedRectangle(cornerRadius: 4, style: .continuous).fill(solved ? color : Theme.night)
+                RoundedRectangle(cornerRadius: 4, style: .continuous).strokeBorder(solved ? Theme.sign : color, lineWidth: 2.5)
             }
         }
         .frame(width: size, height: size)
     }
 }
 
-/// 縦の路線図。駅ごとに丸・駅名・（解いた駅は）手がかり
+/// 縦の路線図。路線の色の太い線路・駅の丸・駅ナンバー・（解いた駅は）手がかり
 struct RouteMap: View {
     @Environment(AppModel.self) private var model
     let mysteryCase: MysteryCase
@@ -104,58 +109,70 @@ struct RouteMap: View {
     private func row(index i: Int, state: StopState, isLast: Bool) -> some View {
         let c = mysteryCase
         let text = c.text
-        let rowHeight: CGFloat = compact ? 40 : 54
+        let color = Theme.line(c.mark)
+        let rowHeight: CGFloat = compact ? 42 : 58
+        let passed = i < (model.journey.nextIndex(c) ?? c.stationCount)
         HStack(alignment: .top, spacing: 14) {
             ZStack(alignment: .top) {
-                // 線路（次の駅まで）
+                // 線路（次の駅まで）。通った区間は路線の色、この先は暗く
                 if !isLast {
                     Rectangle()
-                        .fill(i < (model.journey.nextIndex(c) ?? c.stationCount) ? Theme.deep : Theme.line)
+                        .fill(passed ? color : color.opacity(0.22))
                         .frame(width: Theme.rail)
                         .frame(maxHeight: .infinity)
-                        .padding(.top, 9)
+                        .padding(.top, 10)
                 }
-                StationDot(state: state)
+                StationDot(state: state, mark: c.mark, size: 20)
                 if state == .next {
-                    TrainIcon(size: 20)
-                        .offset(x: -22, y: -1)
+                    TrainIcon(size: 22, mark: c.mark)
+                        .offset(x: -26, y: -2)
                         .transition(reduceMotion ? .opacity : .move(edge: .top).combined(with: .opacity))
                 }
             }
-            .frame(width: 18)
+            .frame(width: 20)
             .frame(minHeight: rowHeight, alignment: .top)
 
-            VStack(alignment: .leading, spacing: 3) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack(spacing: 8) {
                     Text(isLast ? text.terminal : text.stations[i])
-                        .font(Theme.serif(compact ? 14 : 16, isLast ? .semibold : .regular))
-                        .foregroundStyle(state == .locked ? Theme.sub : Theme.ink)
+                        .font(Theme.gothic(compact ? 14 : 17, isLast ? .heavy : .bold))
+                        .foregroundStyle(state == .locked ? Theme.dim : Theme.text)
+                    if !isLast {
+                        Text(String(format: "%@%02d", c.mark, i + 1))
+                            .font(Theme.label(10))
+                            .foregroundStyle(Theme.dim)
+                    }
                     if !isLast, let a = model.journey.arrival(c.id, i) {
                         ArrivalPill(arrival: a, small: true)
                     }
                     if state == .locked {
-                        Image(systemName: "lock")
+                        Image(systemName: "lock.fill")
                             .font(.system(size: 10))
-                            .foregroundStyle(Theme.sub)
+                            .foregroundStyle(Theme.dim)
                     }
                     if state == .next {
-                        Text(tr("次の駅", "Next stop"))
+                        Text(tr("次の駅", "NEXT"))
                             .font(Theme.label(10))
-                            .foregroundStyle(Theme.late)
+                            .foregroundStyle(Theme.ledInk)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 2)
+                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
                     }
                 }
                 if !compact, !isLast, model.journey.arrival(c.id, i) != nil {
-                    Text(c.riddles[i].text.clue)
-                        .font(.system(size: 12))
-                        .foregroundStyle(Theme.sub)
-                        .lineLimit(2)
-                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(alignment: .top, spacing: 5) {
+                        Image(systemName: "magnifyingglass").font(.system(size: 9, weight: .bold)).padding(.top, 2)
+                        Text(c.riddles[i].text.clue)
+                            .font(Theme.body(12))
+                            .lineLimit(2)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .foregroundStyle(Theme.dim)
                 }
             }
-            .padding(.top, 0)
             Spacer(minLength: 0)
         }
-        .padding(.leading, 24)
+        .padding(.leading, 28)
         .contentShape(Rectangle())
         .onTapGesture {
             guard allowsPractice, !isLast, model.journey.arrival(c.id, i) != nil else { return }
@@ -178,22 +195,24 @@ struct RouteMap: View {
     }
 }
 
-/// 定刻 / ◯分遅れ のピル
+/// 定刻 / ◯分遅れ（発車標の小さな表示）
 struct ArrivalPill: View {
     let arrival: Arrival
     var small = false
     var body: some View {
-        Text(arrival.isOnTime ? tr("定刻", "On time") : trf("%d分遅れ", "%d min late", arrival.delayMinutes))
-            .font(.system(size: small ? 10 : 12, weight: .medium))
+        Text(arrival.isOnTime ? tr("定刻", "On time").uppercased() : trf("%d分遅れ", "+%d MIN", arrival.delayMinutes))
+            .font(Theme.label(small ? 9 : 11))
             .monospacedDigit()
-            .foregroundStyle(arrival.isOnTime ? Theme.deep : Theme.late)
-            .padding(.horizontal, small ? 6 : 9)
+            .foregroundStyle(arrival.isOnTime ? Theme.led : Theme.late)
+            .padding(.horizontal, small ? 5 : 8)
             .padding(.vertical, small ? 2 : 4)
-            .background(Capsule().fill(arrival.isOnTime ? Theme.soft : Theme.trainSoft))
+            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.board))
+            .overlay(RoundedRectangle(cornerRadius: 3).strokeBorder((arrival.isOnTime ? Theme.led : Theme.late).opacity(0.4), lineWidth: 1))
     }
 }
 
-/// 駅名標：大きな駅名、下の帯に前の駅と次の駅。解くと右上に改札のパンチの穴
+/// 駅名標：裏から照らされた白い板に太いゴシックの駅名、下に路線の色の帯（前の駅・次の駅）。
+/// 解くと右上に改札のパンチの穴が開く
 struct StationSign: View {
     let mysteryCase: MysteryCase
     let index: Int
@@ -205,17 +224,21 @@ struct StationSign: View {
         let prev = index > 0 ? text.stations[index - 1] : nil
         let next = index + 1 < text.stations.count ? text.stations[index + 1] : text.terminal
         VStack(spacing: 0) {
-            HStack(spacing: 10) {
-                LineMark(mark: mysteryCase.mark, size: 24)
-                Text(String(format: "%@%02d", mysteryCase.mark, index + 1))
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
-                    .foregroundStyle(Theme.deep)
-                Spacer()
+            HStack(alignment: .center, spacing: 12) {
+                LineMark(mark: mysteryCase.mark, number: index + 1, size: 40)
+                Text(text.stations[index])
+                    .font(Theme.gothic(32, .heavy))
+                    .kerning(Lang.isJapanese ? 3 : 0.2)
+                    .foregroundStyle(Theme.signInk)
+                    .minimumScaleFactor(0.55)
+                    .lineLimit(1)
+                Spacer(minLength: 0)
+                // 改札のパンチ：解く前は点線の丸、解くと穴（下の暗い地が見える）
                 ZStack {
-                    Circle().strokeBorder(Theme.line, style: StrokeStyle(lineWidth: 1, dash: [2, 2]))
+                    Circle().strokeBorder(Theme.signSub.opacity(0.5), style: StrokeStyle(lineWidth: 1, dash: [2, 2]))
                     if punched {
-                        Circle().fill(Theme.paper)
-                            .overlay(Circle().strokeBorder(Theme.deep, lineWidth: 1.2))
+                        Circle().fill(Theme.night)
+                            .padding(1)
                             .transition(reduceMotion ? .opacity : .scale(scale: 0.2).combined(with: .opacity))
                     }
                 }
@@ -223,56 +246,48 @@ struct StationSign: View {
                 .accessibilityHidden(true)
             }
             .padding(.horizontal, 14)
-            .padding(.top, 12)
-
-            Text(text.stations[index])
-                .font(Theme.serif(30, .semibold))
-                .kerning(Lang.isJapanese ? 4 : 0.5)
-                .foregroundStyle(Theme.ink)
-                .minimumScaleFactor(0.6)
-                .lineLimit(1)
-                .padding(.vertical, 8)
-                .padding(.horizontal, 14)
+            .padding(.vertical, 14)
 
             // 帯
             HStack(spacing: 0) {
-                Text(prev.map { "← " + $0 } ?? " ")
+                Text(prev.map { "◀ " + $0 } ?? " ")
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(next + " →")
+                Text(next + " ▶")
                     .frame(maxWidth: .infinity, alignment: .trailing)
             }
-            .font(.system(size: 11, weight: .medium))
-            .foregroundStyle(Theme.card)
+            .font(Theme.gothic(12, .bold))
+            .foregroundStyle(Color.white)
             .lineLimit(1)
             .minimumScaleFactor(0.7)
             .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(Theme.deep)
+            .padding(.vertical, 7)
+            .background(Theme.line(mysteryCase.mark))
         }
-        .background(Theme.card)
-        .clipShape(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous))
-        .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.line, lineWidth: Theme.hairline))
-        .shadow(color: Theme.ink.opacity(0.06), radius: 10, y: 4)
+        .background(Theme.sign)
+        .clipShape(RoundedRectangle(cornerRadius: Theme.radiusS, style: .continuous))
+        .overlay(RoundedRectangle(cornerRadius: Theme.radiusS, style: .continuous).strokeBorder(Theme.signInk.opacity(0.6), lineWidth: 2))
+        // 裏からの明かり
+        .shadow(color: Theme.sign.opacity(0.14), radius: 18)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(text.stations[index])
     }
 }
 
-/// 発車標の札（図・暗号）。1 つの札に 1 語
+/// 発車標の札（図・暗号）。黒い発車標に、めくり式の札を並べ、アンバーの光る文字で 1 語ずつ
 struct FigureBoard: View {
     let tokens: [String]
     var body: some View {
         if !tokens.isEmpty {
             let long = tokens.contains { $0.count > 3 }
-            FlowLayout(spacing: 6) {
+            FlowLayout(spacing: 5) {
                 ForEach(Array(tokens.enumerated()), id: \.offset) { _, token in
                     Tile(text: token, wide: long)
                 }
             }
             .padding(12)
             .frame(maxWidth: .infinity)
-            .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.mist))
-            .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.line, lineWidth: Theme.hairline))
+            .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.board))
+            .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.rule, lineWidth: 1.5))
             .accessibilityElement(children: .ignore)
             .accessibilityLabel(tokens.joined(separator: " "))
         }
@@ -283,22 +298,22 @@ struct FigureBoard: View {
         let wide: Bool
         var body: some View {
             let isQuestion = text == "?"
+            let color = isQuestion ? Theme.late : Theme.led
             Text(text)
-                .font(Theme.serif(wide ? 15 : 20, .semibold))
+                .font(wide ? Theme.gothic(15, .bold) : Theme.board(22, .heavy))
                 .monospacedDigit()
-                .foregroundStyle(isQuestion ? Theme.late : Theme.ink)
+                .foregroundStyle(color)
+                .shadow(color: color.opacity(0.7), radius: 4)
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .padding(.horizontal, wide ? 8 : 0)
-                .frame(minWidth: wide ? 0 : 36, minHeight: 44)
+                .padding(.horizontal, wide ? 9 : 0)
+                .frame(minWidth: wide ? 0 : 36, minHeight: 46)
                 .background(
-                    // 札：白い面に、下だけ少し太い線（めくり式の札の厚み）
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .fill(isQuestion ? Theme.trainSoft : Theme.card)
-                        .shadow(color: Theme.line, radius: 0, y: 2)
-                )
-                .overlay(
-                    Rectangle().fill(Theme.line).frame(height: 0.6)
+                    // めくり式の札：上下 2 枚の板と、真ん中の切れ目
+                    VStack(spacing: 1) {
+                        RoundedRectangle(cornerRadius: 3, style: .continuous).fill(Color(hex: 0x1A2127))
+                        RoundedRectangle(cornerRadius: 3, style: .continuous).fill(Color(hex: 0x141A1F))
+                    }
                 )
         }
     }
@@ -349,40 +364,127 @@ struct FlowLayout: Layout {
     }
 }
 
-/// 2 分の線路：目盛りの上を小さな電車が進む。2 分を過ぎると遅れの色
+/// 2 分の線路：発車標の帯の上を小さな電車が進む。残り時間は光る数字。2 分を過ぎると赤
 struct RailTimer: View {
     let elapsed: Int
+    var mark: String = "M"
     var body: some View {
         let target = Arrival.targetSeconds
         let progress = min(1, Double(elapsed) / Double(target))
         let late = elapsed > target
-        HStack(spacing: 10) {
+        let color = late ? Theme.late : Theme.led
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(late ? tr("遅れ", "LATE") : tr("定刻まで", "ON TIME IN"))
+                    .font(Theme.label(9))
+                    .kerning(1.2)
+                    .foregroundStyle(Theme.dim)
+                Text(late ? "+" + Clock.mmss(elapsed - target) : Clock.mmss(target - elapsed))
+                    .font(Theme.board(24, .heavy))
+                    .monospacedDigit()
+                    .contentTransition(.numericText())
+                    .foregroundStyle(color)
+                    .shadow(color: color.opacity(0.6), radius: 5)
+            }
+            .frame(width: 92, alignment: .leading)
             GeometryReader { geo in
                 let w = geo.size.width
                 ZStack(alignment: .leading) {
-                    Rectangle().fill(Theme.line).frame(height: 2)
-                    Rectangle().fill(late ? Theme.train : Theme.accent).frame(width: w * progress, height: 2)
-                    // 30 秒ごとの目盛り
+                    Rectangle().fill(Theme.line(mark).opacity(0.22)).frame(height: 4)
+                    Rectangle().fill(late ? Theme.late : Theme.line(mark)).frame(width: w * progress, height: 4)
+                    // 30 秒ごとの駅
                     ForEach(0..<5, id: \.self) { i in
-                        Rectangle().fill(Theme.sub.opacity(0.5))
-                            .frame(width: 1, height: i == 4 ? 10 : 6)
-                            .offset(x: w * CGFloat(i) / 4 - 0.5)
+                        Circle().fill(Theme.board)
+                            .overlay(Circle().strokeBorder(Theme.dim, lineWidth: 1.2))
+                            .frame(width: i == 4 ? 10 : 6, height: i == 4 ? 10 : 6)
+                            .offset(x: w * CGFloat(i) / 4 - (i == 4 ? 5 : 3))
                     }
-                    TrainIcon(size: 14)
-                        .offset(x: max(0, w * progress - 6), y: -9)
+                    TrainIcon(size: 16, mark: mark)
+                        .offset(x: max(0, w * progress - 7), y: -13)
                 }
                 .frame(height: geo.size.height)
             }
-            .frame(height: 24)
-            Text(late ? "+" + Clock.mmss(elapsed - target) : Clock.mmss(target - elapsed))
-                .font(Theme.serif(17, .semibold))
-                .monospacedDigit()
-                .contentTransition(.numericText())
-                .foregroundStyle(late ? Theme.late : Theme.ink)
-                .frame(width: 56, alignment: .trailing)
+            .frame(height: 30)
         }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.board))
+        .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.rule, lineWidth: 1))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(late ? trf("定刻を %d 秒過ぎた", "%d seconds past on-time", elapsed - target)
                                  : trf("定刻まであと %d 秒", "%d seconds to arrive on time", target - elapsed))
+    }
+}
+
+/// 事件の資料：クラフト紙の紙片。うすい罫、上にクリップ、わずかに傾ける
+struct CaseFileSlip<Content: View>: View {
+    var tilt: Double = -0.8
+    var padding: CGFloat = 16
+    @ViewBuilder var content: Content
+    var body: some View {
+        content
+            .padding(padding)
+            .padding(.top, 6)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(
+                ZStack {
+                    Theme.file
+                    Canvas { ctx, size in
+                        var y: CGFloat = 30
+                        while y < size.height {
+                            ctx.fill(Path(CGRect(x: 0, y: y, width: size.width, height: 0.6)), with: .color(Theme.fileRule.opacity(0.7)))
+                            y += 24
+                        }
+                    }
+                }
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 3, style: .continuous))
+            .overlay(alignment: .topLeading) {
+                PaperClip()
+                    .stroke(Theme.clip, style: StrokeStyle(lineWidth: 2.2, lineCap: .round, lineJoin: .round))
+                    .frame(width: 14, height: 36)
+                    .offset(x: 22, y: -10)
+                    .accessibilityHidden(true)
+            }
+            .shadow(color: .black.opacity(0.5), radius: 10, y: 6)
+            .rotationEffect(.degrees(tilt))
+    }
+}
+
+/// ゼムクリップ（細い線の縦長の輪 2 重）
+struct PaperClip: Shape {
+    func path(in r: CGRect) -> Path {
+        var p = Path()
+        p.addRoundedRect(in: r, cornerSize: CGSize(width: r.width / 2, height: r.width / 2), style: .continuous)
+        let inner = CGRect(x: r.minX + r.width * 0.25, y: r.minY + r.height * 0.14, width: r.width * 0.5, height: r.height * 0.62)
+        p.addRoundedRect(in: inner, cornerSize: CGSize(width: inner.width / 2, height: inner.width / 2), style: .continuous)
+        return p
+    }
+}
+
+/// 資料の見出し（等幅のタイプ文字）
+struct FileHeading: View {
+    let text: String
+    var body: some View {
+        Text(text.uppercased())
+            .font(Theme.label(10))
+            .kerning(1.6)
+            .foregroundStyle(Theme.fileSub)
+    }
+}
+
+/// 赤いスタンプ（「解決」など。1 画面に 1 つだけ）
+struct Stamp: View {
+    let text: String
+    var body: some View {
+        Text(text)
+            .font(Theme.gothic(15, .heavy))
+            .kerning(2)
+            .foregroundStyle(Theme.late)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 4)
+            .overlay(RoundedRectangle(cornerRadius: 4).strokeBorder(Theme.late, lineWidth: 2.2))
+            .rotationEffect(.degrees(-8))
+            .opacity(0.9)
     }
 }

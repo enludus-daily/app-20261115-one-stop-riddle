@@ -30,8 +30,8 @@ struct RootView: View {
         }
         .animation(.easeOut(duration: 0.35), value: model.onboarded)
         .environment(model)
-        // 淡いミントと細い線の路線図が主役。StudyReel と同じく画面はライトに固定する
-        .preferredColorScheme(.light)
+        // 夜の地下鉄の駅が世界。発車標の光と駅名標の明かりが主役なので、画面はダークに固定する
+        .preferredColorScheme(.dark)
         .fullScreenCover(item: $model.cover) { cover in
             Group {
                 switch cover {
@@ -41,7 +41,7 @@ struct RootView: View {
             }
             .environment(model)
             .environment(\.locale, Lang.locale)
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
             .accessibilityHidden(model.activeSheet != nil)
         }
         .sheet(item: $model.activeSheet) { sheet in
@@ -54,7 +54,7 @@ struct RootView: View {
             }
             .environment(model)
             .environment(\.locale, Lang.locale)
-            .preferredColorScheme(.light)
+            .preferredColorScheme(.dark)
         }
         // 手応えの表（README）：押す・正解・定刻・まちがい・事件解決
         .sensoryFeedback(trigger: model.pressTick) { _, _ in model.hapticsOn ? .selection : nil }

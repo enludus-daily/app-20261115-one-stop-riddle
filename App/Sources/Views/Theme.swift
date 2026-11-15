@@ -1,46 +1,78 @@
 import SwiftUI
 
 // 見た目の決まり（app-quality-bar の look.md）。色・書体・角丸・余白・影はここだけで決める。
-// トーンは StudyReel：淡いミントの 1 系統、細い線、セリフの見出しと数字。
-// ピーチは「いまの電車」「遅れ」だけ（路線図の現在地に理由がある所）。
+// 世界：夜の地下鉄の駅とミステリー（2026-11-16 作り直し）。
+// - 地は夜のホームの暗い紺（画面はダークに固定。発車標の光と駅名標の明かりが主役のため）
+// - 光るものはアンバーの発車標だけ（led の 5 段階）。主なボタン・いまの電車・数字の表示
+// - 路線の色は事件ごと（M 青・Y 紅・K 緑）。帯・線路・駅ナンバリングの輪だけに使う
+// - 手がかり・物語・真相は「事件の資料」のクラフト紙の紙片（file の段階）
+// - 遅れ・まちがいは小さな赤い点だけ（late）
 enum Theme {
-    // 地と文字
-    static let paper = Color(hex: 0xF4F8F7)
-    static let ink = Color(hex: 0x24343A)
-    static let sub = Color(hex: 0x86989B)
-    static let line = Color(hex: 0xDCE6E4)
+    // 地（夜のホーム）：暗い順に
+    static let night = Color(hex: 0x0A0F14)      // 画面の地
+    static let tunnel = Color(hex: 0x131B23)     // 面（設定の面・選択肢）
+    static let platform = Color(hex: 0x1C2630)   // 一段上の面・押せない面
+    static let rule = Color(hex: 0x2A3743)       // 線
+    static let text = Color(hex: 0xECF0F3)       // 文字（真っ白にしない）
+    static let dim = Color(hex: 0x8B9AA7)        // 補助の文字
 
-    // 主な色（ミント）の 5 段階：accent / soft / deep / card / 飾り
-    static let accent = Color(hex: 0xA6D5CA)
-    static let soft = Color(hex: 0xE2F1ED)
-    static let deep = Color(hex: 0x4C8A7E)
-    static let card = Color(hex: 0xFBFDFC)
-    static let mist = Color(hex: 0xEEF4F3)
+    // 発車標の光（アンバー）の 5 段階：accent / soft / deep / 地 / 飾り（光のにじみ）
+    static let led = Color(hex: 0xFFB43C)
+    static let ledSoft = Color(hex: 0x3B2B12)
+    static let ledDeep = Color(hex: 0xD98F1A)
+    static let ledInk = Color(hex: 0x1A1205)     // アンバーの上の文字
+    static let board = Color(hex: 0x05080A)      // 発車標の黒い地
+    static let glow = Color(hex: 0xFFB43C).opacity(0.45)
 
-    // 電車（いまの位置）と遅れ
-    static let train = Color(hex: 0xF2C7B4)
-    static let trainSoft = Color(hex: 0xFBEAE2)
-    static let late = Color(hex: 0xB9785F)
+    // 駅名標（裏から照らされた白い板）
+    static let sign = Color(hex: 0xF3F5F6)
+    static let signInk = Color(hex: 0x111820)
+    static let signSub = Color(hex: 0x6B7782)
 
-    // 書体：見出しと数字はセリフ、本文はサンセリフ
-    /// 日本語はヒラギノ明朝、英語は New York（システムのセリフは日本語に明朝を当てないため、言語で分ける）
-    static func serif(_ size: CGFloat, _ weight: Font.Weight = .regular) -> Font {
-        if Lang.isJapanese {
-            return .custom(weight == .regular ? "HiraMinProN-W3" : "HiraMinProN-W6", size: size)
+    // 事件の資料（クラフト紙の紙片）
+    static let file = Color(hex: 0xECE2CB)
+    static let fileInk = Color(hex: 0x2A251D)
+    static let fileSub = Color(hex: 0x786D5A)
+    static let fileRule = Color(hex: 0xD3C6A8)
+    static let clip = Color(hex: 0xB9C2CA)
+
+    // 遅れ・まちがい（小さな点と文字だけ）
+    static let late = Color(hex: 0xFF6A5C)
+
+    /// 路線の色（事件ごと）。帯・線路・駅ナンバリングの輪に使う
+    static func line(_ mark: String) -> Color {
+        switch mark {
+        case "Y": Color(hex: 0xE5578A)   // ゆうなぎ線：夕なぎの紅
+        case "K": Color(hex: 0x34BF8C)   // きりさめ線：霧の緑
+        default: Color(hex: 0x2F9DE2)    // みなと線：港の青
         }
-        return .system(size: size, weight: weight, design: .serif)
     }
-    static func label(_ size: CGFloat = 11) -> Font { .system(size: size, weight: .medium) }
-    static func body(_ size: CGFloat = 15) -> Font { .system(size: size) }
 
-    // 角丸の段階
-    static let radiusS: CGFloat = 8
-    static let radiusM: CGFloat = 14
-    static let radiusL: CGFloat = 20
+    // 書体：見出しは駅の案内表示のような太いゴシック、数字と札は発車標の等幅、本文はふつうのゴシック
+    /// 日本語はヒラギノ角ゴ（W6・W8）、英語は SF の縦長（condensed）
+    static func gothic(_ size: CGFloat, _ weight: Font.Weight = .bold) -> Font {
+        if Lang.isJapanese {
+            let name = weight == .heavy || weight == .black ? "HiraginoSans-W8" : (weight == .bold ? "HiraginoSans-W7" : "HiraginoSans-W6")
+            return .custom(name, size: size)
+        }
+        return .system(size: size, weight: weight).width(.condensed)
+    }
+    /// 発車標の文字（等幅・太い）
+    static func board(_ size: CGFloat, _ weight: Font.Weight = .bold) -> Font {
+        .system(size: size, weight: weight, design: .monospaced)
+    }
+    /// 小さなラベル（等幅、字間を開ける）
+    static func label(_ size: CGFloat = 11) -> Font { .system(size: size, weight: .semibold, design: .monospaced) }
+    static func body(_ size: CGFloat = 15, _ weight: Font.Weight = .regular) -> Font { .system(size: size, weight: weight) }
+
+    // 角丸の段階（駅の設備は角ばっている）
+    static let radiusS: CGFloat = 4
+    static let radiusM: CGFloat = 10
+    static let radiusL: CGFloat = 14
 
     // 線
-    static let hairline: CGFloat = 0.8
-    static let rail: CGFloat = 3
+    static let hairline: CGFloat = 1
+    static let rail: CGFloat = 6
 }
 
 extension Color {
@@ -52,85 +84,108 @@ extension Color {
     }
 }
 
-/// 小さなラベル（字間を開ける）
+/// 小さなラベル（等幅・字間を開ける。発車標の欄の見出し）
 struct Eyebrow: View {
     let text: String
-    var color: Color = Theme.sub
+    var color: Color = Theme.dim
     var body: some View {
         Text(text.uppercased())
             .font(Theme.label(10))
-            .kerning(1.2)
+            .kerning(1.6)
             .foregroundStyle(color)
     }
 }
 
-/// 路線の記号（丸に M・Y・K）
+/// 駅ナンバリングの記号：白い丸に路線の色の太い輪、中に路線の記号（と駅の番号）
 struct LineMark: View {
     let mark: String
+    var number: Int? = nil
     var size: CGFloat = 26
-    var filled = true
+    var dimmed = false
     var body: some View {
+        let color = Theme.line(mark)
         ZStack {
-            Circle().fill(filled ? Theme.deep : Theme.card)
-            Circle().strokeBorder(Theme.deep, lineWidth: filled ? 0 : 1.2)
-            Text(mark)
-                .font(.system(size: size * 0.48, weight: .semibold, design: .rounded))
-                .foregroundStyle(filled ? Theme.card : Theme.deep)
+            Circle().fill(Theme.sign)
+            Circle().strokeBorder(dimmed ? Theme.dim : color, lineWidth: max(2.5, size * 0.13))
+            VStack(spacing: -size * 0.06) {
+                Text(mark)
+                    .font(.system(size: size * (number == nil ? 0.46 : 0.32), weight: .heavy))
+                if let number {
+                    Text(String(format: "%02d", number))
+                        .font(.system(size: size * 0.3, weight: .heavy))
+                        .monospacedDigit()
+                }
+            }
+            .foregroundStyle(Theme.signInk)
         }
         .frame(width: size, height: size)
         .accessibilityHidden(true)
     }
 }
 
-/// 押すと少し縮む（手応えの表：押す）
+/// 押すと少し沈む（手応えの表：押す）
 struct PressStyle: ButtonStyle {
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.96 : 1)
-            .animation(.spring(response: 0.25, dampingFraction: 0.7), value: configuration.isPressed)
+            .scaleEffect(configuration.isPressed && !reduceMotion ? 0.97 : 1)
+            .offset(y: configuration.isPressed && !reduceMotion ? 1.5 : 0)
+            .animation(.spring(response: 0.22, dampingFraction: 0.7), value: configuration.isPressed)
     }
 }
 
-/// 主なボタン（濃いミントに白い文字。高さ 54）
+/// 主なボタン：発車標のアンバーの光。黒い太字、下辺だけ厚い（押しボタンの厚み）
 struct PrimaryButtonLabel: View {
     let title: String
     var subtitle: String? = nil
     var enabled = true
     var body: some View {
+        let shape = RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous)
         VStack(spacing: 2) {
             Text(title)
-                .font(.system(size: 16, weight: .semibold))
+                .font(Theme.gothic(16, .bold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
             if let subtitle {
                 Text(subtitle)
-                    .font(Theme.label(11))
-                    .opacity(0.85)
+                    .font(Theme.body(11, .medium))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                    .opacity(0.8)
             }
         }
-        .foregroundStyle(enabled ? Theme.card : Theme.sub)
-        .frame(maxWidth: .infinity, minHeight: 54)
-        .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(enabled ? Theme.deep : Theme.mist))
-        .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(enabled ? .clear : Theme.line, lineWidth: Theme.hairline))
+        .padding(.horizontal, 12)
+        .foregroundStyle(enabled ? Theme.ledInk : Theme.dim)
+        .frame(maxWidth: .infinity, minHeight: 56)
+        .background(
+            ZStack {
+                shape.fill(enabled ? Theme.ledDeep : Theme.platform).offset(y: 3)
+                shape.fill(enabled ? Theme.led : Theme.platform)
+            }
+        )
+        .overlay(shape.strokeBorder(enabled ? .clear : Theme.rule, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+        .shadow(color: enabled ? Theme.glow : .clear, radius: 14, y: 2)
+        .padding(.bottom, 3)
     }
 }
 
-/// 細い線のボタン
+/// 線のボタン（暗い面に細い線）
 struct OutlineButtonLabel: View {
     let title: String
     var systemImage: String? = nil
     var body: some View {
         HStack(spacing: 6) {
-            if let systemImage { Image(systemName: systemImage).font(.system(size: 13)) }
-            Text(title).font(.system(size: 14, weight: .medium))
+            if let systemImage { Image(systemName: systemImage).font(.system(size: 13, weight: .semibold)) }
+            Text(title).font(Theme.gothic(14, .semibold))
         }
-        .foregroundStyle(Theme.deep)
-        .frame(maxWidth: .infinity, minHeight: 46)
-        .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.card))
-        .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.accent, lineWidth: 1))
+        .foregroundStyle(Theme.text)
+        .frame(maxWidth: .infinity, minHeight: 50)
+        .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.tunnel))
+        .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.rule, lineWidth: 1))
     }
 }
 
-/// 白い面（細い縁と弱い影）
+/// 暗い面（設定・一覧）
 struct Panel<Content: View>: View {
     var padding: CGFloat = 16
     @ViewBuilder var content: Content
@@ -138,24 +193,50 @@ struct Panel<Content: View>: View {
         content
             .padding(padding)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(RoundedRectangle(cornerRadius: Theme.radiusL, style: .continuous).fill(Theme.card))
-            .overlay(RoundedRectangle(cornerRadius: Theme.radiusL, style: .continuous).strokeBorder(Theme.line, lineWidth: Theme.hairline))
-            .shadow(color: Theme.ink.opacity(0.05), radius: 10, y: 4)
+            .background(RoundedRectangle(cornerRadius: Theme.radiusL, style: .continuous).fill(Theme.tunnel))
+            .overlay(RoundedRectangle(cornerRadius: Theme.radiusL, style: .continuous).strokeBorder(Theme.rule, lineWidth: Theme.hairline))
     }
 }
 
-/// 画面の背景：ほぼ白の地に、線路の枕木のような細い横線を薄く
-struct TrackBackground: View {
+/// 画面の背景：夜のホームの壁。暗い紺の地に、地下鉄のタイル目地をごく薄く。上だけ少し明るい（天井の照明）
+struct NightBackground: View {
     var body: some View {
         Canvas { ctx, size in
+            let w: CGFloat = 44, h: CGFloat = 22
+            var row = 0
             var y: CGFloat = 0
             while y < size.height {
-                ctx.fill(Path(CGRect(x: 0, y: y, width: size.width, height: 0.5)), with: .color(Theme.line.opacity(0.45)))
-                y += 28
+                let fade = max(0.0, 1 - Double(y / max(1, size.height)) * 1.4)
+                let color = Theme.rule.opacity(0.22 * fade + 0.04)
+                ctx.fill(Path(CGRect(x: 0, y: y, width: size.width, height: 0.6)), with: .color(color))
+                var x: CGFloat = row % 2 == 0 ? 0 : -w / 2
+                while x < size.width {
+                    ctx.fill(Path(CGRect(x: x, y: y, width: 0.6, height: h)), with: .color(color))
+                    x += w
+                }
+                y += h
+                row += 1
             }
         }
-        .background(Theme.paper)
+        .background(
+            LinearGradient(colors: [Color(hex: 0x16212B), Theme.night, Theme.night],
+                           startPoint: .top, endPoint: .bottom)
+        )
         .ignoresSafeArea()
+        .accessibilityHidden(true)
+    }
+}
+
+/// 路線の色の帯（駅の壁に引かれた帯。上下に細い白い縁）
+struct LineBand: View {
+    let mark: String
+    var height: CGFloat = 8
+    var body: some View {
+        VStack(spacing: 0) {
+            Rectangle().fill(Theme.sign.opacity(0.85)).frame(height: 1)
+            Rectangle().fill(Theme.line(mark)).frame(height: height)
+            Rectangle().fill(Theme.sign.opacity(0.85)).frame(height: 1)
+        }
         .accessibilityHidden(true)
     }
 }

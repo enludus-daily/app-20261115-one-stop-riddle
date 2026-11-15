@@ -9,7 +9,7 @@ struct RideView: View {
 
     var body: some View {
         ZStack {
-            TrackBackground()
+            NightBackground()
             if let c = model.rideCase, let ride = model.ride, let riddle = model.rideRiddle {
                 if sizeClass == .regular {
                     // Duo の内側：左に路線図と物語、右に謎
@@ -48,18 +48,24 @@ struct RideView: View {
                         .transition(.opacity.combined(with: .move(edge: .bottom)))
                 } else {
                     TimelineView(.periodic(from: .now, by: 1)) { context in
-                        RailTimer(elapsed: model.elapsed(at: context.date))
+                        RailTimer(elapsed: model.elapsed(at: context.date), mark: c.mark)
                     }
                     HStack(spacing: 8) {
-                        Eyebrow(text: riddle.kind.label, color: Theme.deep)
+                        Text(riddle.kind.label.uppercased())
+                            .font(Theme.label(10))
+                            .kerning(1.4)
+                            .foregroundStyle(Theme.ledInk)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 3)
+                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
                         if ride.practice {
-                            Eyebrow(text: tr("練習 · 記録は変わりません", "Practice · records unchanged"))
+                            Eyebrow(text: tr("練習 · 記録は変わりません", "Practice · records unchanged"), color: Theme.dim)
                         }
                     }
                     Text(text.q)
-                        .font(.system(size: 17))
-                        .lineSpacing(5)
-                        .foregroundStyle(Theme.ink)
+                        .font(Theme.body(17, .medium))
+                        .lineSpacing(6)
+                        .foregroundStyle(Theme.text)
                         .fixedSize(horizontal: false, vertical: true)
                     FigureBoard(tokens: text.figure)
                     if ride.hintsShown > 0 {
@@ -67,13 +73,13 @@ struct RideView: View {
                             ForEach(0..<ride.hintsShown, id: \.self) { i in
                                 HStack(alignment: .top, spacing: 8) {
                                     Text(verbatim: "\(i + 1)")
-                                        .font(Theme.serif(13, .semibold))
-                                        .foregroundStyle(Theme.deep)
+                                        .font(Theme.board(12, .heavy))
+                                        .foregroundStyle(Theme.ledInk)
                                         .frame(width: 20, height: 20)
-                                        .background(Circle().fill(Theme.soft))
+                                        .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
                                     Text(text.hints[i])
-                                        .font(.system(size: 14))
-                                        .foregroundStyle(Theme.ink)
+                                        .font(Theme.body(14, .medium))
+                                        .foregroundStyle(Theme.fileInk)
                                         .fixedSize(horizontal: false, vertical: true)
                                 }
                                 .transition(.opacity.combined(with: .move(edge: .top)))
@@ -81,7 +87,9 @@ struct RideView: View {
                         }
                         .padding(12)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.soft.opacity(0.6)))
+                        // ヒントは事件の資料のメモ（黄ばんだ紙片）
+                        .background(RoundedRectangle(cornerRadius: 3, style: .continuous).fill(Theme.file))
+                        .rotationEffect(.degrees(0.6))
                     }
                 }
             }
@@ -99,15 +107,19 @@ struct RideView: View {
                 .accessibilityLabel(tr("路線図にもどる", "Back to the map"))
                 .accessibilityIdentifier("main.closeRide")
                 Spacer()
-                Text(c.text.line)
-                    .font(Theme.label(12))
-                    .foregroundStyle(Theme.sub)
+                HStack(spacing: 6) {
+                    LineMark(mark: c.mark, size: 18)
+                    Text(c.text.line)
+                        .font(Theme.gothic(13, .bold))
+                        .foregroundStyle(Theme.text)
+                }
                 Spacer()
                 Color.clear.frame(width: 44, height: 44)
             }
-            .foregroundStyle(Theme.deep)
+            .foregroundStyle(Theme.text)
             .padding(.horizontal, 12)
-            .background(Theme.paper.opacity(0.96))
+            .background(Theme.night.opacity(0.96))
+            .overlay(alignment: .bottom) { Rectangle().fill(Theme.line(c.mark)).frame(height: 3) }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             Group {
@@ -125,7 +137,7 @@ struct RideView: View {
             .padding(.horizontal, 20)
             .padding(.top, 10)
             .padding(.bottom, 8)
-            .background(Theme.paper.opacity(0.96).ignoresSafeArea())
+            .background(Theme.night.opacity(0.97).ignoresSafeArea())
         }
     }
 
@@ -147,19 +159,30 @@ struct RideView: View {
                             withAnimation(.linear(duration: 0.42)) { shake[i, default: 0] += 1 }
                         }
                     } label: {
-                        Text(text.choices[i])
-                            .font(.system(size: text.choices[i].count > 10 ? 13 : 16, weight: .medium))
-                            .multilineTextAlignment(.center)
-                            .lineLimit(2)
-                            .minimumScaleFactor(0.7)
-                            .strikethrough(wrong, color: Theme.late)
-                            .foregroundStyle(wrong ? Theme.sub : Theme.ink)
-                            .padding(.horizontal, 8)
-                            .frame(maxWidth: .infinity, minHeight: 58)
-                            .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(wrong ? Theme.mist : Theme.card))
-                            .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous)
-                                .strokeBorder(wrong ? Theme.line : Theme.accent, lineWidth: 1))
-                            .shadow(color: Theme.line, radius: 0, y: wrong ? 0 : 2)
+                        // 選択肢：駅の押しボタンのような暗い板。左上に A〜D、下辺だけ厚い
+                        HStack(spacing: 8) {
+                            Text(verbatim: ["A", "B", "C", "D"][i % 4])
+                                .font(Theme.board(11, .heavy))
+                                .foregroundStyle(wrong ? Theme.dim : Theme.led)
+                            Text(text.choices[i])
+                                .font(Theme.gothic(text.choices[i].count > 10 ? 13 : 16, .bold))
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(2)
+                                .minimumScaleFactor(0.7)
+                                .strikethrough(wrong, color: Theme.late)
+                                .foregroundStyle(wrong ? Theme.dim : Theme.text)
+                            Spacer(minLength: 0)
+                        }
+                        .padding(.horizontal, 12)
+                        .frame(maxWidth: .infinity, minHeight: 58)
+                        .background(
+                            ZStack {
+                                RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.board).offset(y: wrong ? 0 : 3)
+                                RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(wrong ? Theme.night : Theme.platform)
+                            }
+                        )
+                        .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous)
+                            .strokeBorder(wrong ? Theme.late.opacity(0.4) : Theme.rule, lineWidth: 1))
                     }
                     .buttonStyle(PressStyle())
                     .modifier(Shake(animatableData: CGFloat(shake[i, default: 0])))
@@ -169,25 +192,26 @@ struct RideView: View {
             }
             Button { model.showHint() } label: {
                 HStack(spacing: 6) {
-                    Image(systemName: "lightbulb").font(.system(size: 12))
+                    Image(systemName: "magnifyingglass").font(.system(size: 12, weight: .bold))
                     Text(ride.hintsShown < 3 ? trf("ヒント %d / 3", "Hint %d / 3", ride.hintsShown + 1) : tr("ヒントはここまで", "No more hints"))
-                        .font(.system(size: 13, weight: .medium))
+                        .font(Theme.gothic(13, .bold))
                         .monospacedDigit()
                     if ride.hintsShown == 2 && !model.isPro {
-                        Text(verbatim: "Pro")
-                            .font(.system(size: 10, weight: .semibold))
-                            .padding(.horizontal, 6).padding(.vertical, 2)
-                            .background(Capsule().fill(Theme.soft))
+                        Text(verbatim: "PRO")
+                            .font(Theme.label(9))
+                            .foregroundStyle(Theme.ledInk)
+                            .padding(.horizontal, 5).padding(.vertical, 2)
+                            .background(RoundedRectangle(cornerRadius: 3).fill(Theme.led))
                     }
                     Spacer()
                     Text(tr("1つにつき1分遅れ", "+1 min each"))
-                        .font(.system(size: 11))
-                        .foregroundStyle(Theme.sub)
+                        .font(Theme.label(10))
+                        .foregroundStyle(Theme.dim)
                 }
-                .foregroundStyle(Theme.deep)
+                .foregroundStyle(Theme.led)
                 .padding(.horizontal, 14)
                 .frame(maxWidth: .infinity, minHeight: 44)
-                .background(Capsule().strokeBorder(Theme.line, lineWidth: Theme.hairline))
+                .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.rule, style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
             }
             .disabled(ride.hintsShown >= 3)
             .accessibilityIdentifier(ride.hintsShown >= 3 ? "hint" : "main.hint")
@@ -205,7 +229,7 @@ struct Shake: GeometryEffect {
     }
 }
 
-/// 着いた：定刻か遅れか、答えのわけ、開いた物語の場面
+/// 着いた：定刻か遅れか（発車標の表示）、答えのわけ、開いた物語の場面（事件の資料）
 struct ArrivalPanel: View {
     @Environment(AppModel.self) private var model
     let mysteryCase: MysteryCase
@@ -217,52 +241,66 @@ struct ArrivalPanel: View {
 
     var body: some View {
         let text = riddle.text
+        let color = arrival.isOnTime ? Theme.led : Theme.late
         VStack(alignment: .leading, spacing: 16) {
-            HStack(alignment: .firstTextBaseline, spacing: 10) {
-                Text(arrival.isOnTime ? tr("定刻着", "On time") : trf("%d分遅れで到着", "Arrived %d min late", arrival.delayMinutes))
-                    .font(Theme.serif(26, .semibold))
-                    .foregroundStyle(arrival.isOnTime ? Theme.deep : Theme.late)
-                Spacer()
-                Text(Clock.mmss(arrival.seconds))
-                    .font(Theme.serif(20))
-                    .monospacedDigit()
-                    .foregroundStyle(Theme.ink)
-            }
-            .scaleEffect(shown || reduceMotion ? 1 : 0.94, anchor: .leading)
-            .opacity(shown || reduceMotion ? 1 : 0)
-            HStack(spacing: 12) {
-                detail(tr("ヒント", "Hints"), "\(arrival.hints)")
-                detail(tr("まちがい", "Misses"), "\(arrival.misses)")
-                detail(tr("答え", "Answer"), text.choices[riddle.answer])
-            }
-            Text(text.why)
-                .font(.system(size: 14))
-                .lineSpacing(4)
-                .foregroundStyle(Theme.sub)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Panel {
-                VStack(alignment: .leading, spacing: 10) {
-                    HStack(spacing: 8) {
-                        LineMark(mark: mysteryCase.mark, size: 18)
-                        Eyebrow(text: ride.practice ? tr("この駅の場面", "This stop's scene") : tr("物語がひとつ進んだ", "A new scene opens"), color: Theme.deep)
-                    }
-                    Text(text.scene)
-                        .font(.system(size: 15))
-                        .lineSpacing(5)
-                        .foregroundStyle(Theme.ink)
-                        .fixedSize(horizontal: false, vertical: true)
-                    HStack(alignment: .top, spacing: 6) {
-                        Image(systemName: "magnifyingglass").font(.system(size: 11))
-                        Text(text.clue)
-                            .font(.system(size: 12, weight: .medium))
-                            .fixedSize(horizontal: false, vertical: true)
-                    }
-                    .foregroundStyle(Theme.deep)
-                    .padding(.horizontal, 10).padding(.vertical, 6)
-                    .background(Capsule().fill(Theme.soft))
+            // 発車標：「定刻着」/「◯分遅れ」と所要時間が光る
+            VStack(alignment: .leading, spacing: 10) {
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    Text(arrival.isOnTime ? tr("定刻着", "ON TIME") : trf("%d分遅れで到着", "%d MIN LATE", arrival.delayMinutes))
+                        .font(Theme.gothic(26, .heavy))
+                        .foregroundStyle(color)
+                        .shadow(color: color.opacity(0.6), radius: 6)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.6)
+                    Spacer()
+                    Text(Clock.mmss(arrival.seconds))
+                        .font(Theme.board(22, .heavy))
+                        .monospacedDigit()
+                        .foregroundStyle(color)
+                        .shadow(color: color.opacity(0.6), radius: 4)
+                }
+                Rectangle().fill(Theme.rule).frame(height: 1)
+                HStack(spacing: 0) {
+                    detail(tr("ヒント", "Hints"), "\(arrival.hints)")
+                    detail(tr("まちがい", "Misses"), "\(arrival.misses)")
+                    detail(tr("答え", "Answer"), text.choices[riddle.answer])
                 }
             }
+            .padding(14)
+            .background(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).fill(Theme.board))
+            .overlay(RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous).strokeBorder(Theme.rule, lineWidth: 1))
+            .scaleEffect(shown || reduceMotion ? 1 : 0.94, anchor: .top)
+            .opacity(shown || reduceMotion ? 1 : 0)
+            Text(text.why)
+                .font(Theme.body(14))
+                .lineSpacing(5)
+                .foregroundStyle(Theme.dim)
+                .fixedSize(horizontal: false, vertical: true)
+
+            CaseFileSlip(tilt: 0.9) {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack(spacing: 8) {
+                        LineMark(mark: mysteryCase.mark, number: ride.index + 1, size: 24)
+                        FileHeading(text: ride.practice ? tr("この駅の場面", "This stop's scene") : tr("物語がひとつ進んだ", "A new scene opens"))
+                    }
+                    Text(text.scene)
+                        .font(Theme.body(15, .medium))
+                        .lineSpacing(5)
+                        .foregroundStyle(Theme.fileInk)
+                        .fixedSize(horizontal: false, vertical: true)
+                    HStack(alignment: .top, spacing: 6) {
+                        Image(systemName: "magnifyingglass").font(.system(size: 11, weight: .bold))
+                        Text(text.clue)
+                            .font(Theme.gothic(12, .bold))
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .foregroundStyle(Theme.fileInk)
+                    .padding(.horizontal, 10).padding(.vertical, 6)
+                    // 手がかりは、資料に引いたマーカー
+                    .background(Rectangle().fill(Theme.led.opacity(0.45)))
+                }
+            }
+            .padding(.top, 6)
             .offset(y: shown || reduceMotion ? 0 : 16)
             .opacity(shown || reduceMotion ? 1 : 0)
         }
@@ -273,17 +311,14 @@ struct ArrivalPanel: View {
     }
 
     private func detail(_ label: String, _ value: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
+        VStack(alignment: .leading, spacing: 3) {
             Eyebrow(text: label)
             Text(value)
-                .font(Theme.serif(15, .semibold))
+                .font(Theme.gothic(15, .bold))
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .foregroundStyle(Theme.ink)
+                .foregroundStyle(Theme.text)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(10)
-        .background(RoundedRectangle(cornerRadius: Theme.radiusS, style: .continuous).fill(Theme.card))
-        .overlay(RoundedRectangle(cornerRadius: Theme.radiusS, style: .continuous).strokeBorder(Theme.line, lineWidth: Theme.hairline))
     }
 }

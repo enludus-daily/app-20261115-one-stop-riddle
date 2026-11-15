@@ -84,7 +84,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%d min late"
+            "value": "+%d MIN"
           }
         }
       }
@@ -95,18 +95,18 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Arrived %d min late"
+            "value": "%d MIN LATE"
           }
         }
       }
     },
-    "%d日つづけて乗車": {
+    "%d日連続": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%d-day streak"
+            "value": "%d-DAY STREAK"
           }
         }
       }
@@ -117,7 +117,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "/ 10 stops"
+            "value": "/ 10 STOPS"
           }
         }
       }
@@ -140,6 +140,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Each stop you solve opens a new scene."
+          }
+        }
+      }
+    },
+    "10駅で 終点・真相": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 STOPS → THE TRUTH"
           }
         }
       }
@@ -441,13 +452,13 @@
         }
       }
     },
-    "事件 %d · %@": {
+    "事件 %02d": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Case %d · %@"
+            "value": "CASE %02d"
           }
         }
       }
@@ -491,7 +502,40 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Case closed"
+            "value": "CASE CLOSED"
+          }
+        }
+      }
+    },
+    "事件資料 · 物語": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case file · Story"
+          }
+        }
+      }
+    },
+    "事件資料 · 真相": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case file · The truth"
+          }
+        }
+      }
+    },
+    "事件資料 · 集めた手がかり": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case file · Your clues"
           }
         }
       }
@@ -540,6 +584,17 @@
         }
       }
     },
+    "全線定期券": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ALL-LINE PASS"
+          }
+        }
+      }
+    },
     "共有": {
       "extractionState": "manual",
       "localizations": {
@@ -569,6 +624,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sound is off by default. No network—your records stay on this iPhone."
+          }
+        }
+      }
+    },
+    "各停": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LOCAL"
           }
         }
       }
@@ -623,7 +689,18 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "%d on time"
+            "value": "%d ON TIME"
+          }
+        }
+      }
+    },
+    "定刻まで": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ON TIME IN"
           }
         }
       }
@@ -667,7 +744,18 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "On time"
+            "value": "ON TIME"
+          }
+        }
+      }
+    },
+    "平日": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "WEEKDAY"
           }
         }
       }
@@ -821,7 +909,7 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Next stop"
+            "value": "NEXT"
           }
         }
       }
@@ -859,6 +947,17 @@
         }
       }
     },
+    "次は ひと駅 2分": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "NEXT  1 STOP  2 MIN"
+          }
+        }
+      }
+    },
     "次へ": {
       "extractionState": "manual",
       "localizations": {
@@ -870,6 +969,17 @@
         }
       }
     },
+    "消音": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SILENT"
+          }
+        }
+      }
+    },
     "無料 %d 駅 → Pro で 10 駅＋終点": {
       "extractionState": "manual",
       "localizations": {
@@ -877,17 +987,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%d free stops → all 10 + terminus with Pro"
-          }
-        }
-      }
-    },
-    "物語": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Story"
           }
         }
       }
@@ -921,17 +1020,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Share image"
-          }
-        }
-      }
-    },
-    "真相": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The truth"
           }
         }
       }
@@ -1042,6 +1130,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Every answer moves the story one stop."
+          }
+        }
+      }
+    },
+    "解決": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CLOSED"
           }
         }
       }
@@ -1200,6 +1299,28 @@
         }
       }
     },
+    "通信なし 記録は端末に": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OFFLINE  ON-DEVICE"
+          }
+        }
+      }
+    },
+    "遅れ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "LATE"
+          }
+        }
+      }
+    },
     "閉じる": {
       "extractionState": "manual",
       "localizations": {
@@ -1207,17 +1328,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Close"
-          }
-        }
-      }
-    },
-    "集めた手がかり": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your clues"
           }
         }
       }
@@ -1262,6 +1372,17 @@
           "stringUnit": {
             "state": "translated",
             "value": "Silent and offline"
+          }
+        }
+      }
+    },
+    "駅": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stops"
           }
         }
       }
