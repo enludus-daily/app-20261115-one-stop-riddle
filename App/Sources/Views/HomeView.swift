@@ -10,10 +10,13 @@ struct HomeView: View {
             TrackBackground()
             if sizeClass == .regular {
                 // Duo の内側など広い画面：左に路線図、右に物語
+                VStack(spacing: 0) {
+                header
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
                 HStack(alignment: .top, spacing: 24) {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 18) {
-                            header
                             caseTabs
                             caseTitle
                             RouteMap(mysteryCase: model.current)
@@ -29,33 +32,33 @@ struct HomeView: View {
                     .padding(.trailing, 20)
                     .padding(.bottom, 12)
                 }
-            } else {
-                ScrollView {
-                    VStack(alignment: .leading, spacing: 18) {
-                        caseTabs
-                        caseTitle
-                        RouteMap(mysteryCase: model.current)
-                            .padding(.top, 4)
-                        StoryPanel(mysteryCase: model.current)
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 8)
-                    .padding(.bottom, 24)
-                    .frame(maxWidth: 560)
-                    .frame(maxWidth: .infinity)
                 }
-                .safeAreaInset(edge: .top, spacing: 0) {
+            } else {
+                // 見出しと「次の駅へ」はスクロールの外に固定する（UI テストで押せることを確かめる）
+                VStack(spacing: 0) {
                     header
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
-                        .background(Theme.paper.opacity(0.96))
-                }
-                .safeAreaInset(edge: .bottom, spacing: 0) {
+                    Rectangle().fill(Theme.line).frame(height: Theme.hairline)
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 18) {
+                            caseTabs
+                            caseTitle
+                            RouteMap(mysteryCase: model.current)
+                                .padding(.top, 4)
+                            StoryPanel(mysteryCase: model.current)
+                        }
+                        .padding(.horizontal, 20)
+                        .padding(.top, 14)
+                        .padding(.bottom, 24)
+                        .frame(maxWidth: 560)
+                        .frame(maxWidth: .infinity)
+                    }
+                    Rectangle().fill(Theme.line).frame(height: Theme.hairline)
                     bottomBar
                         .padding(.horizontal, 20)
                         .padding(.top, 10)
                         .padding(.bottom, 8)
-                        .background(Theme.paper.opacity(0.96).ignoresSafeArea())
                 }
             }
         }
@@ -183,7 +186,7 @@ struct HomeView: View {
                 PrimaryButtonLabel(title: tr("今日のこの便はここまで", "That's it for this ride"),
                                    subtitle: trf("次の駅は %@ から", "Next stop opens at %@", Clock.time(model.nextOpening)),
                                    enabled: false)
-                    .accessibilityIdentifier("main.rest")
+                    .accessibilityIdentifier("home.rest")
                 Text(tr("解いた駅を押すと、練習で解き直せます。", "Tap a solved stop to replay it for practice."))
                     .font(.system(size: 11))
                     .foregroundStyle(Theme.sub)
