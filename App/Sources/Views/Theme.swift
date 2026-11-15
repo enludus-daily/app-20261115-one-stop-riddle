@@ -150,7 +150,7 @@ struct PrimaryButtonLabel: View {
         let shape = RoundedRectangle(cornerRadius: Theme.radiusM, style: .continuous)
         let color = Theme.line(lineMark)
         HStack(spacing: 0) {
-            Color.clear.frame(width: 10)
+            Color.clear.frame(width: 10, height: 1)
             VStack(spacing: 2) {
                 Text(title)
                     .font(Theme.gothic(16, .heavy))
