@@ -1,0 +1,1711 @@
+{
+ "cases": [
+  {
+   "id": "c1",
+   "mark": "M",
+   "free": 10,
+   "ja": {
+    "line": "みなと線",
+    "title": "時計台の手紙",
+    "intro": "朝 7:42 の電車の 3 号車に、名前のない手紙が残されていた。「金曜日、時計台が止まる」。だれが、なぜ書いたのか。",
+    "stations": [
+     "灯台前",
+     "汐見町",
+     "港町",
+     "魚市場",
+     "時計台",
+     "赤レンガ",
+     "海浜公園",
+     "望洋台",
+     "岬口",
+     "かもめ台"
+    ],
+    "terminal": "終点 白波"
+   },
+   "en": {
+    "line": "Harbor Line",
+    "title": "The Clock Tower Letter",
+    "intro": "An unsigned letter was left in car 3 of the 7:42 train: “On Friday, the clock tower will stop.” Who wrote it, and why?",
+    "stations": [
+     "Lighthouse",
+     "Tidewatch",
+     "Port Town",
+     "Fish Market",
+     "Clock Tower",
+     "Red Brick",
+     "Seaside Park",
+     "Ocean View",
+     "Cape Gate",
+     "Gull Hill"
+    ],
+    "terminal": "Terminus: Whitecap"
+   },
+   "riddles": [
+    {
+     "kind": "pattern",
+     "answer": 2,
+     "ja": {
+      "q": "ホームの発車時刻が、ある決まりで並んでいる。次の電車は何時何分？",
+      "choices": [
+       "7:24",
+       "7:30",
+       "7:32",
+       "7:48"
+      ],
+      "hints": [
+       "となりどうしの「分」の差を見てみよう。",
+       "差は 2・4・8……と増えている。",
+       "差が毎回 2 倍。16 分のあとは？"
+      ],
+      "why": "差が 2・4・8 と倍になる。7:16 の次は 16 分あとの 7:32。",
+      "scene": "車掌の佐野さんが 3 号車の座席で手紙を見つけた。「金曜日、時計台が止まる」とだけある。名前はない。",
+      "clue": "手紙は 7:42 の電車の 3 号車にあった",
+      "figure": [
+       "7:02",
+       "7:04",
+       "7:08",
+       "7:16",
+       "?"
+      ]
+     },
+     "en": {
+      "q": "The departure board follows a rule. When is the next train?",
+      "choices": [
+       "7:24",
+       "7:30",
+       "7:32",
+       "7:48"
+      ],
+      "hints": [
+       "Look at the gap in minutes between neighbors.",
+       "The gaps are 2, 4, 8…",
+       "Each gap doubles. What comes 16 minutes after 7:16?"
+      ],
+      "why": "The gaps double: 2, 4, 8, 16. So 7:16 + 16 minutes = 7:32.",
+      "scene": "Conductor Sano found the letter on a seat in car 3. It says only: “On Friday, the clock tower will stop.” No name.",
+      "clue": "The letter was in car 3 of the 7:42 train",
+      "figure": [
+       "7:02",
+       "7:04",
+       "7:08",
+       "7:16",
+       "?"
+      ]
+     }
+    },
+    {
+     "kind": "cipher",
+     "answer": 0,
+     "ja": {
+      "q": "手紙のインクの色が、暗号でメモされていた。札は「〇行の〇段」を表す。何色？",
+      "choices": [
+       "みどり",
+       "まどい",
+       "あおい",
+       "みかん"
+      ],
+      "hints": [
+       "五十音表の「行」と「段」で 1 文字ずつ読む。",
+       "ま行のい段は「み」。",
+       "た行のお段に濁点で「ど」、ら行のい段は「り」。"
+      ],
+      "why": "ま行い段＝み、た行お段＋濁点＝ど、ら行い段＝り。「みどり」。",
+      "scene": "手紙はみどりのインクで書かれていた。駅の窓口のペンは黒と赤だけだ。",
+      "clue": "手紙はみどりのインク",
+      "figure": [
+       "ま・い",
+       "た・お゛",
+       "ら・い"
+      ]
+     },
+     "en": {
+      "q": "The color of the ink was noted in a code: each letter is shifted one step forward. What color?",
+      "choices": [
+       "GREEN",
+       "BLACK",
+       "BROWN",
+       "WHITE"
+      ],
+      "hints": [
+       "Each letter was moved one place along the alphabet.",
+       "Move each letter one step back: H becomes G.",
+       "H→G, S→R, F→E, F→E, O→N."
+      ],
+      "why": "Shift each letter back by one: HSFFO → GREEN.",
+      "scene": "The letter was written in green ink. The station's pens are only black and red.",
+      "clue": "Written in green ink",
+      "figure": [
+       "H",
+       "S",
+       "F",
+       "F",
+       "O"
+      ]
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 0,
+     "ja": {
+      "q": "3 人が 1 号車・2 号車・3 号車に 1 人ずつ乗った。千夏は 1 号車ではない。蓮は千夏より前の号車。湊は 3 号車ではない。3 号車に乗ったのは？",
+      "choices": [
+       "千夏",
+       "蓮",
+       "湊",
+       "だれもいない"
+      ],
+      "hints": [
+       "蓮は千夏より前。だから蓮はいちばん後ろの 3 号車ではない。",
+       "湊も 3 号車ではない。",
+       "残るのはひとり。"
+      ],
+      "why": "蓮は千夏より前なので 3 号車ではなく、湊も違う。3 号車は千夏。",
+      "scene": "文字の右側が、こすれてにじんでいる。左手で書くと、書いたばかりの字を手がなぞってしまう。",
+      "clue": "にじみ方から、書いた人は左ききらしい",
+      "figure": []
+     },
+     "en": {
+      "q": "Three people rode cars 1, 2 and 3, one each. Chika was not in car 1. Ren rode ahead of Chika. Minato was not in car 3. Who rode car 3?",
+      "choices": [
+       "Chika",
+       "Ren",
+       "Minato",
+       "Nobody"
+      ],
+      "hints": [
+       "Ren is ahead of Chika, so Ren can't be in the last car.",
+       "Minato isn't in car 3 either.",
+       "Only one person is left."
+      ],
+      "why": "Ren is ahead of Chika, so not car 3, and neither is Minato. Car 3 is Chika.",
+      "scene": "The right side of each word is smudged. A left-handed writer drags their hand across fresh ink.",
+      "clue": "The smudges suggest a left-handed writer",
+      "figure": []
+     }
+    },
+    {
+     "kind": "insight",
+     "answer": 0,
+     "ja": {
+      "q": "針があるのに、ぬわない。顔があるのに、しゃべらない。なーんだ？",
+      "choices": [
+       "時計",
+       "地図",
+       "切符",
+       "傘"
+      ],
+      "hints": [
+       "「針」はぬい針だけではない。",
+       "「顔」は人の顔だけではない。文字盤のこともいう。",
+       "この事件の名前にも出てくる。"
+      ],
+      "why": "時計には長針・短針と、文字盤（顔）がある。",
+      "scene": "手紙から、かすかに機械の油のにおいがする。",
+      "clue": "手紙から機械油のにおい",
+      "figure": []
+     },
+     "en": {
+      "q": "It has hands but can't clap, and a face but no eyes. What is it?",
+      "choices": [
+       "A clock",
+       "A map",
+       "A ticket",
+       "An umbrella"
+      ],
+      "hints": [
+       "The hands aren't human hands.",
+       "A “face” can also be a dial.",
+       "It's in the name of this case."
+      ],
+      "why": "A clock has hands and a face, but can't clap or see.",
+      "scene": "The letter smells faintly of machine oil.",
+      "clue": "The letter smells of machine oil",
+      "figure": []
+     }
+    },
+    {
+     "kind": "map",
+     "answer": 1,
+     "ja": {
+      "q": "切符には「急行の、始発の次の停車駅で乗った」とある。急行は灯台前から 1 駅おきに止まる。乗った駅は？",
+      "choices": [
+       "汐見町",
+       "港町",
+       "魚市場",
+       "時計台"
+      ],
+      "hints": [
+       "急行は灯台前に止まり、1 駅とばして次に止まる。",
+       "灯台前 → （汐見町を通過）→ ？",
+       "とばすのは 1 駅だけ。"
+      ],
+      "why": "灯台前の次は汐見町を通過し、港町に止まる。",
+      "scene": "座席の下に、手紙と同じ日の切符の半券。乗った駅は港町。",
+      "clue": "書いた人は港町から乗った",
+      "figure": [
+       "灯台前",
+       "→",
+       "汐見町",
+       "→",
+       "港町",
+       "→",
+       "魚市場",
+       "→",
+       "時計台"
+      ]
+     },
+     "en": {
+      "q": "The ticket says: “boarded at the express's first stop after the origin.” The express stops at every other station from Lighthouse. Where did they board?",
+      "choices": [
+       "Tidewatch",
+       "Port Town",
+       "Fish Market",
+       "Clock Tower"
+      ],
+      "hints": [
+       "The express stops at Lighthouse, then skips one.",
+       "Lighthouse → (skip Tidewatch) → ?",
+       "It only skips one station."
+      ],
+      "why": "After Lighthouse it skips Tidewatch and stops at Port Town.",
+      "scene": "Under the seat: a ticket stub from the same morning. Boarded at Port Town.",
+      "clue": "The writer boarded at Port Town",
+      "figure": [
+       "Lighthouse",
+       "→",
+       "Tidewatch",
+       "→",
+       "Port Town",
+       "→",
+       "Fish Mkt",
+       "→",
+       "Clock Twr"
+      ]
+     }
+    },
+    {
+     "kind": "figure",
+     "answer": 1,
+     "ja": {
+      "q": "歯が 48 ある大きな歯車が 1 回転すると、かみ合っている歯が 12 の小さな歯車は何回転する？",
+      "choices": [
+       "2 回転",
+       "4 回転",
+       "6 回転",
+       "12 回転"
+      ],
+      "hints": [
+       "かみ合う歯の数は、両方で同じだけ進む。",
+       "大きい歯車が 1 回転すると、歯は 48 進む。",
+       "48 ÷ 12 は？"
+      ],
+      "why": "48 歯ぶん進むので、12 歯の歯車は 48 ÷ 12 ＝ 4 回転。",
+      "scene": "手紙の裏に小さく「48 の歯にひび」。時計台の中の歯車を見た人でないと書けない。",
+      "clue": "「48 の歯にひび」と書いた人は、時計台の中を知っている",
+      "figure": [
+       "⚙48",
+       "⇄",
+       "⚙12"
+      ]
+     },
+     "en": {
+      "q": "A big gear with 48 teeth turns once. How many times does the small 12-tooth gear it meshes with turn?",
+      "choices": [
+       "2 times",
+       "4 times",
+       "6 times",
+       "12 times"
+      ],
+      "hints": [
+       "Meshed gears move the same number of teeth.",
+       "One turn of the big gear moves 48 teeth.",
+       "What is 48 ÷ 12?"
+      ],
+      "why": "48 teeth pass, so the 12-tooth gear turns 48 ÷ 12 = 4 times.",
+      "scene": "On the back, in tiny letters: “crack in the 48-tooth gear.” Only someone who has seen inside the tower could write that.",
+      "clue": "The writer has seen inside the clock tower",
+      "figure": [
+       "⚙48",
+       "⇄",
+       "⚙12"
+      ]
+     }
+    },
+    {
+     "kind": "cipher",
+     "answer": 0,
+     "ja": {
+      "q": "札の数字は五十音の順番（あ＝1、い＝2…）。港町の、ある場所を指している。どこ？",
+      "choices": [
+       "みせ",
+       "むし",
+       "みそ",
+       "まち"
+      ],
+      "hints": [
+       "あ行が 1〜5、か行が 6〜10、さ行が 11〜15。",
+       "ま行は 31 から。31 が「ま」。",
+       "32 は「み」、14 は「せ」。"
+      ],
+      "why": "32＝み（ま行の 2 つ目）、14＝せ（さ行の 4 つ目）。「みせ」。",
+      "scene": "港町の時計店では、修理の札をみどりのインクで書く。店には見習いがひとりいる。",
+      "clue": "港町の時計店は、修理の札をみどりのインクで書く",
+      "figure": [
+       "32",
+       "14"
+      ]
+     },
+     "en": {
+      "q": "Each number is a letter's place in the alphabet (A=1, B=2…). It names a place in Port Town. Where?",
+      "choices": [
+       "SHOP",
+       "SHIP",
+       "STOP",
+       "SHOT"
+      ],
+      "hints": [
+       "A=1, so S is the 19th letter.",
+       "8 is H, 15 is O.",
+       "16 is P."
+      ],
+      "why": "19-8-15-16 = S-H-O-P.",
+      "scene": "The clock shop in Port Town writes its repair tags in green ink. It has one apprentice.",
+      "clue": "The Port Town clock shop uses green ink for repair tags",
+      "figure": [
+       "19",
+       "8",
+       "15",
+       "16"
+      ]
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 1,
+     "ja": {
+      "q": "A・B・C のうち、本当のことを言っているのは 1 人だけ。A「B はうそつき」 B「C はうそつき」 C「A も B もうそつき」。本当のことを言ったのは？",
+      "choices": [
+       "A",
+       "B",
+       "C",
+       "だれもいない"
+      ],
+      "hints": [
+       "1 人ずつ「この人が本当なら」と仮に決めて、ほかの 2 人と合うか試す。",
+       "C が本当なら A はうそつき。すると「B はうそつき」がうそ。おかしい。",
+       "B が本当なら C はうそつき、A もうそつきになる。"
+      ],
+      "why": "B が本当なら C はうそつき、C の言葉はうそ、A の「B はうそつき」もうそ。ぴったり合う。",
+      "scene": "学生の湊は左ききだが、ノートもペンも青しか使わない。友だちがそう話した。",
+      "clue": "湊は左ききだが、青いペンしか使わない",
+      "figure": []
+     },
+     "en": {
+      "q": "Of A, B and C, exactly one tells the truth. A: “B is lying.” B: “C is lying.” C: “A and B are both lying.” Who told the truth?",
+      "choices": [
+       "A",
+       "B",
+       "C",
+       "Nobody"
+      ],
+      "hints": [
+       "Assume each person is truthful in turn and check the other two.",
+       "If C is truthful, A lies—so B is not lying. Two truths. No.",
+       "If B is truthful, C lies, and A lies too."
+      ],
+      "why": "If B tells the truth, C lies, and A's claim that B lies is false. Exactly one truth.",
+      "scene": "Minato the student is left-handed, but a friend says he only ever uses blue pens.",
+      "clue": "Minato is left-handed but only uses blue pens",
+      "figure": []
+     }
+    },
+    {
+     "kind": "insight",
+     "answer": 0,
+     "ja": {
+      "q": "上から読んでも下から読んでも同じになる看板はどれ？",
+      "choices": [
+       "わたしまけましたわ",
+       "パンやのパン",
+       "みなとまち",
+       "とけいだい"
+      ],
+      "hints": [
+       "1 文字ずつ、うしろから読んでみる。",
+       "「わ・た・し・ま・け」……",
+       "まん中の「け」をはさんで左右が同じ。"
+      ],
+      "why": "「わたしまけましたわ」は逆から読んでも同じ。",
+      "scene": "パン屋の千夏は右ききで、トングも伝票も右手。朝は港町から乗る。",
+      "clue": "千夏は右きき",
+      "figure": []
+     },
+     "en": {
+      "q": "Which station sign reads the same backwards?",
+      "choices": [
+       "STEP ON NO PETS",
+       "TRAIN AT NINE",
+       "CLOCK STOP",
+       "PARK HERE"
+      ],
+      "hints": [
+       "Ignore the spaces and read each one backwards.",
+       "S-T-E-P-O-N…",
+       "It is a palindrome around the middle “O”."
+      ],
+      "why": "STEPONNOPETS reads the same in both directions.",
+      "scene": "Chika the baker is right-handed—tongs and receipts, always the right hand. She boards at Port Town.",
+      "clue": "Chika is right-handed",
+      "figure": []
+     }
+    },
+    {
+     "kind": "figure",
+     "answer": 2,
+     "ja": {
+      "q": "時計の針が 4 時ちょうどを指している。長い針と短い針がつくる小さいほうの角度は？",
+      "choices": [
+       "60°",
+       "90°",
+       "120°",
+       "150°"
+      ],
+      "hints": [
+       "文字盤は 12 等分。",
+       "1 目盛りは 360 ÷ 12 ＝ 30°。",
+       "12 から 4 まで、何目盛り？"
+      ],
+      "why": "12 から 4 まで 4 目盛り × 30° ＝ 120°。",
+      "scene": "金曜日。時計台は止まらなかった。前の晩、ひびの入った歯車が取り替えられていた。だれかが、手紙で知らせてくれたおかげで。",
+      "clue": "手紙のおかげで、金曜日の前に歯車が直った",
+      "figure": [
+       "🕓"
+      ]
+     },
+     "en": {
+      "q": "A clock shows exactly 4:00. What is the smaller angle between the hands?",
+      "choices": [
+       "60°",
+       "90°",
+       "120°",
+       "150°"
+      ],
+      "hints": [
+       "The dial is split into 12.",
+       "Each step is 360 ÷ 12 = 30°.",
+       "How many steps from 12 to 4?"
+      ],
+      "why": "4 steps × 30° = 120°.",
+      "scene": "Friday. The clock didn't stop. The cracked gear had been replaced the night before—thanks to someone's letter.",
+      "clue": "Thanks to the letter, the gear was fixed in time",
+      "figure": [
+       "🕓"
+      ]
+     }
+    }
+   ],
+   "finale": {
+    "answer": 1,
+    "ja": {
+     "q": "手紙を書いたのはだれ？",
+     "suspects": [
+      {
+       "name": "パン屋の千夏",
+       "note": "港町から乗る。右きき"
+      },
+      {
+       "name": "見習い時計師の蓮",
+       "note": "港町の時計店で働く。左きき"
+      },
+      {
+       "name": "駅長の大野",
+       "note": "電車には乗らない。赤いペン"
+      },
+      {
+       "name": "学生の湊",
+       "note": "左きき。青いペンだけ"
+      }
+     ],
+     "truth": "書いたのは見習いの蓮。時計台の点検に付いていったとき、歯車のひびに気づいた。見習いは時計台に触れてはいけない決まりで、名前を書けなかった。店のみどりのインクと、左手のにじみが、彼を指していた。"
+    },
+    "en": {
+     "q": "Who wrote the letter?",
+     "suspects": [
+      {
+       "name": "Chika, the baker",
+       "note": "Boards at Port Town. Right-handed"
+      },
+      {
+       "name": "Ren, the apprentice",
+       "note": "Works at the Port Town clock shop. Left-handed"
+      },
+      {
+       "name": "Mr. Ono, stationmaster",
+       "note": "Never rides the train. Red pen"
+      },
+      {
+       "name": "Minato, the student",
+       "note": "Left-handed. Blue pens only"
+      }
+     ],
+     "truth": "Ren, the apprentice clockmaker. He spotted the cracked gear while tagging along on an inspection, but apprentices aren't allowed to touch the tower—so he couldn't sign. The shop's green ink and his left-handed smudges gave him away."
+    }
+   }
+  },
+  {
+   "id": "c2",
+   "mark": "Y",
+   "free": 3,
+   "ja": {
+    "line": "ゆうなぎ線",
+    "title": "七番線の落とし物",
+    "intro": "終電のあと、七番線のホームに黄色いリボンの小箱がひとつ。開けるとオルゴールが鳴った。持ち主はだれ？",
+    "stations": [
+     "夕凪",
+     "川べり",
+     "花屋町",
+     "中央",
+     "学園前",
+     "運動公園",
+     "車庫前",
+     "星見台",
+     "北口",
+     "七ツ森"
+    ],
+    "terminal": "終点 宵の丘"
+   },
+   "en": {
+    "line": "Dusk Line",
+    "title": "Lost on Platform 7",
+    "intro": "After the last train, a small box with a yellow ribbon sat alone on platform 7. Opened, it played a music-box tune. Whose is it?",
+    "stations": [
+     "Sunset",
+     "Riverside",
+     "Flower St",
+     "Central",
+     "College",
+     "Sports Park",
+     "Depot",
+     "Stargaze",
+     "North Gate",
+     "Seven Woods"
+    ],
+    "terminal": "Terminus: Evening Hill"
+   },
+   "riddles": [
+    {
+     "kind": "pattern",
+     "answer": 1,
+     "ja": {
+      "q": "ホームの番号札が、ある決まりで並んでいる。次の数は？",
+      "choices": [
+       "12",
+       "13",
+       "14",
+       "15"
+      ],
+      "hints": [
+       "どの数も、1 とその数でしか割り切れない。",
+       "2・3・5・7・11 は「素数」。",
+       "11 の次の素数は？"
+      ],
+      "why": "素数の列。11 の次は 13。",
+      "scene": "清掃の美和さんが、終電のあとの七番線で小箱を見つけた。黄色いリボン、手のひらにのる大きさ。",
+      "clue": "小箱は終電のあとの七番線にあった",
+      "figure": [
+       "2",
+       "3",
+       "5",
+       "7",
+       "11",
+       "?"
+      ]
+     },
+     "en": {
+      "q": "The platform numbers follow a rule. What comes next?",
+      "choices": [
+       "12",
+       "13",
+       "14",
+       "15"
+      ],
+      "hints": [
+       "Each number divides only by 1 and itself.",
+       "2, 3, 5, 7, 11 are primes.",
+       "What is the next prime after 11?"
+      ],
+      "why": "Primes: after 11 comes 13.",
+      "scene": "Miwa, the cleaner, found the box on platform 7 after the last train. A yellow ribbon, small enough to hold in one hand.",
+      "clue": "Found on platform 7 after the last train",
+      "figure": [
+       "2",
+       "3",
+       "5",
+       "7",
+       "11",
+       "?"
+      ]
+     }
+    },
+    {
+     "kind": "cipher",
+     "answer": 0,
+     "ja": {
+      "q": "リボンの色が、うしろから書かれていた。何色？",
+      "choices": [
+       "きいろ",
+       "くろい",
+       "きのこ",
+       "いろり"
+      ],
+      "hints": [
+       "右から 1 文字ずつ読む。",
+       "最後の「き」が最初になる。",
+       "き・い・ろ。"
+      ],
+      "why": "「ろいき」を右から読むと「きいろ」。",
+      "scene": "リボンはあざやかな黄色。花屋町の花屋でも同じリボンを使っている。",
+      "clue": "リボンは黄色（花屋町の花屋と同じ）",
+      "figure": [
+       "ろ",
+       "い",
+       "き"
+      ]
+     },
+     "en": {
+      "q": "The ribbon's color was written backwards. What color?",
+      "choices": [
+       "YELLOW",
+       "PURPLE",
+       "ORANGE",
+       "SILVER"
+      ],
+      "hints": [
+       "Read it from right to left.",
+       "The last letter, Y, comes first.",
+       "Y-E-L-L-O-W."
+      ],
+      "why": "WOLLEY read backwards is YELLOW.",
+      "scene": "The ribbon is bright yellow—the same kind the florist on Flower St uses.",
+      "clue": "Yellow ribbon, same as the Flower St florist",
+      "figure": [
+       "W",
+       "O",
+       "L",
+       "L",
+       "E",
+       "Y"
+      ]
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 1,
+     "ja": {
+      "q": "小箱のカードに「〇さい おめでとう」。〇は 1 けたの数で、3 で割り切れ、4 で割ると 2 余る。〇は？",
+      "choices": [
+       "3",
+       "6",
+       "9",
+       "8"
+      ],
+      "hints": [
+       "3 で割り切れる 1 けたの数は 3・6・9。",
+       "それぞれ 4 で割った余りを出す。",
+       "3→3、6→2、9→1。"
+      ],
+      "why": "6 ÷ 4 ＝ 1 余り 2。条件に合うのは 6。",
+      "scene": "カードには「6さい おめでとう」。子ども向けの贈りものらしい。",
+      "clue": "6 歳の誕生日の贈りもの",
+      "figure": [
+       "〇",
+       "÷3",
+       "＝余り0",
+       "÷4",
+       "＝余り2"
+      ]
+     },
+     "en": {
+      "q": "The card says “Happy ◯th birthday.” ◯ is a single digit, divisible by 3, and leaves 2 when divided by 4. What is ◯?",
+      "choices": [
+       "3",
+       "6",
+       "9",
+       "8"
+      ],
+      "hints": [
+       "Single digits divisible by 3: 3, 6, 9.",
+       "Find each remainder when divided by 4.",
+       "3→3, 6→2, 9→1."
+      ],
+      "why": "6 ÷ 4 = 1 remainder 2. It's 6.",
+      "scene": "The card reads “Happy 6th birthday.” A present for a child.",
+      "clue": "A present for a 6th birthday",
+      "figure": [
+       "◯",
+       "÷3",
+       "r0",
+       "÷4",
+       "r2"
+      ]
+     }
+    },
+    {
+     "kind": "pattern",
+     "answer": 0,
+     "ja": {
+      "q": "ホームの矢印の札が、ある決まりで回っている。次は？",
+      "choices": [
+       "↓",
+       "←",
+       "↑",
+       "↙"
+      ],
+      "hints": [
+       "となりどうしで、どれだけ回っている？",
+       "1 つごとに 45° ずつ右回り。",
+       "→ から 45° が ↘、さらに 45° は？"
+      ],
+      "why": "45° ずつ右回り。↘ の次は ↓。",
+      "scene": "小箱のそばに、白い手袋が片方だけ落ちていた。",
+      "clue": "白い手袋が片方",
+      "figure": [
+       "↑",
+       "↗",
+       "→",
+       "↘",
+       "?"
+      ]
+     },
+     "en": {
+      "q": "The arrow signs on the platform turn by a rule. What's next?",
+      "choices": [
+       "↓",
+       "←",
+       "↑",
+       "↙"
+      ],
+      "hints": [
+       "How far does each arrow turn from the last?",
+       "45° clockwise each time.",
+       "45° past ↘ is…?"
+      ],
+      "why": "Each turns 45° clockwise. After ↘ comes ↓.",
+      "scene": "Next to the box lay a single white glove.",
+      "clue": "A single white glove",
+      "figure": [
+       "↑",
+       "↗",
+       "→",
+       "↘",
+       "?"
+      ]
+     }
+    },
+    {
+     "kind": "map",
+     "answer": 1,
+     "ja": {
+      "q": "七番線の夜の電車は 10 分おき。22:40 発が、最後から 4 本目。終電は何時？",
+      "choices": [
+       "23:00",
+       "23:10",
+       "23:20",
+       "23:30"
+      ],
+      "hints": [
+       "最後から 4 本目のあとに、3 本ある。",
+       "22:40 → 22:50 → …",
+       "10 分ずつ 3 回足す。"
+      ],
+      "why": "22:40・22:50・23:00・23:10。終電は 23:10。",
+      "scene": "終電は 23:10 に七番線を出た。そのあとホームに残っていたのは、乗務を終えた人と清掃の人だけ。",
+      "clue": "終電は 23:10。そのあとホームにいたのは乗務員と清掃員",
+      "figure": [
+       "22:40",
+       "→",
+       "?",
+       "→",
+       "?",
+       "→",
+       "終電"
+      ]
+     },
+     "en": {
+      "q": "Night trains leave platform 7 every 10 minutes. The 22:40 is the fourth-to-last. When is the last train?",
+      "choices": [
+       "23:00",
+       "23:10",
+       "23:20",
+       "23:30"
+      ],
+      "hints": [
+       "Three more trains come after the fourth-to-last.",
+       "22:40 → 22:50 → …",
+       "Add 10 minutes three times."
+      ],
+      "why": "22:40, 22:50, 23:00, 23:10. The last train is 23:10.",
+      "scene": "The last train left platform 7 at 23:10. After that, only crew finishing their shift and the cleaner were on the platform.",
+      "clue": "Last train 23:10; afterwards only crew and the cleaner remained",
+      "figure": [
+       "22:40",
+       "→",
+       "?",
+       "→",
+       "?",
+       "→",
+       "LAST"
+      ]
+     }
+    },
+    {
+     "kind": "insight",
+     "answer": 0,
+     "ja": {
+      "q": "使えば使うほど、小さくなるものは？",
+      "choices": [
+       "せっけん",
+       "かさ",
+       "時計",
+       "切符"
+      ],
+      "hints": [
+       "使っても形が変わらないものは外す。",
+       "手を洗うときに使う。",
+       "泡になって減っていく。"
+      ],
+      "why": "せっけんは使うたびに減って小さくなる。",
+      "scene": "花屋町の花屋の陽向は 19 時に店を閉め、いつもバスで帰る。夜の電車には乗らない。",
+      "clue": "花屋の陽向は 19 時閉店、バスで帰る",
+      "figure": []
+     },
+     "en": {
+      "q": "What gets smaller every time you use it?",
+      "choices": [
+       "A bar of soap",
+       "An umbrella",
+       "A clock",
+       "A ticket"
+      ],
+      "hints": [
+       "Rule out things that keep their shape.",
+       "You use it to wash your hands.",
+       "It turns into bubbles."
+      ],
+      "why": "A bar of soap shrinks every time you use it.",
+      "scene": "Hina, the Flower St florist, closes at 7 p.m. and always takes the bus home. She never rides the night trains.",
+      "clue": "Hina the florist closes at 7 p.m. and takes the bus",
+      "figure": []
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 1,
+     "ja": {
+      "q": "会社員の健の子どもの年は、2 年前の年の 2 倍が、今の年より 6 多い。いま何歳？",
+      "choices": [
+       "8 歳",
+       "10 歳",
+       "12 歳",
+       "14 歳"
+      ],
+      "hints": [
+       "いまの年を x とおく。2 年前は x−2。",
+       "2 × (x−2) ＝ x ＋ 6。",
+       "2x − 4 ＝ x ＋ 6。"
+      ],
+      "why": "2(x−2) ＝ x＋6 から x ＝ 10。",
+      "scene": "健は終電で帰ることが多い。でも子どもは今年 10 歳になった。",
+      "clue": "健の子どもは 10 歳",
+      "figure": []
+     },
+     "en": {
+      "q": "Ken's child's age two years ago, doubled, is 6 more than the child's age now. How old is the child?",
+      "choices": [
+       "8",
+       "10",
+       "12",
+       "14"
+      ],
+      "hints": [
+       "Call the age now x. Two years ago it was x−2.",
+       "2 × (x−2) = x + 6.",
+       "2x − 4 = x + 6."
+      ],
+      "why": "2(x−2) = x+6 gives x = 10.",
+      "scene": "Ken often takes the last train home. But his child turned 10 this year.",
+      "clue": "Ken's child is 10",
+      "figure": []
+     }
+    },
+    {
+     "kind": "cipher",
+     "answer": 0,
+     "ja": {
+      "q": "届け出の名前が、五十音で 1 つうしろにずらして書かれていた。もとの名前は？",
+      "choices": [
+       "みわ",
+       "さき",
+       "ひな",
+       "まわ"
+      ],
+      "hints": [
+       "1 文字ずつ、五十音で 1 つ前に戻す。",
+       "「む」の 1 つ前は「み」。",
+       "「を」の 1 つ前は「わ」。"
+      ],
+      "why": "む→み、を→わ。「みわ」。",
+      "scene": "小箱を落とし物として届けたのは清掃の美和さん。23:30 に見つけて、すぐ駅に届けた。",
+      "clue": "届けたのは清掃の美和（見つけた人）",
+      "figure": [
+       "む",
+       "を"
+      ]
+     },
+     "en": {
+      "q": "The name on the lost-property form was written with each letter shifted one step forward. What's the real name?",
+      "choices": [
+       "MIWA",
+       "MIKA",
+       "NIWA",
+       "MINA"
+      ],
+      "hints": [
+       "Move each letter one step back.",
+       "N becomes M, J becomes I.",
+       "X becomes W, B becomes A."
+      ],
+      "why": "NJXB shifted back one is MIWA.",
+      "scene": "Miwa the cleaner handed the box in. She found it at 23:30 and brought it straight to the office.",
+      "clue": "Miwa handed it in (she found it)",
+      "figure": [
+       "N",
+       "J",
+       "X",
+       "B"
+      ]
+     }
+    },
+    {
+     "kind": "figure",
+     "answer": 1,
+     "ja": {
+      "q": "このマス目の中に、正方形はいくつある？",
+      "choices": [
+       "4 個",
+       "5 個",
+       "8 個",
+       "9 個"
+      ],
+      "hints": [
+       "小さい正方形を数える。",
+       "小さい正方形 4 つを合わせた大きい正方形もある。",
+       "4 ＋ 1。"
+      ],
+      "why": "小さい 4 個と、全体の大きい 1 個で 5 個。",
+      "scene": "ゆうなぎ線の運転士は、乗務のあいだ白い手袋をはめる決まりだ。",
+      "clue": "運転士は白い手袋をはめる",
+      "figure": [
+       "□□",
+       "□□"
+      ]
+     },
+     "en": {
+      "q": "How many squares are in this grid?",
+      "choices": [
+       "4",
+       "5",
+       "8",
+       "9"
+      ],
+      "hints": [
+       "Count the small squares.",
+       "The four together also make one big square.",
+       "4 + 1."
+      ],
+      "why": "Four small squares plus the one big square: 5.",
+      "scene": "Dusk Line drivers must wear white gloves while on duty.",
+      "clue": "Drivers wear white gloves",
+      "figure": [
+       "□□",
+       "□□"
+      ]
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 1,
+     "ja": {
+      "q": "今日は木曜日。誕生日は「おとといの 3 日あと」。何曜日？",
+      "choices": [
+       "木曜日",
+       "金曜日",
+       "土曜日",
+       "日曜日"
+      ],
+      "hints": [
+       "まず「おととい」を出す。",
+       "木曜日のおとといは火曜日。",
+       "火曜日の 3 日あと。"
+      ],
+      "why": "おとといは火曜、その 3 日あとは金曜。",
+      "scene": "終電を運転した沙希さんには 6 歳になる娘がいる。誕生日はあしたの金曜日だ。",
+      "clue": "運転士の沙希の娘は、あした 6 歳になる",
+      "figure": [
+       "木"
+      ]
+     },
+     "en": {
+      "q": "Today is Thursday. The birthday is “three days after the day before yesterday.” Which day is it?",
+      "choices": [
+       "Thursday",
+       "Friday",
+       "Saturday",
+       "Sunday"
+      ],
+      "hints": [
+       "First find the day before yesterday.",
+       "Two days before Thursday is Tuesday.",
+       "Three days after Tuesday."
+      ],
+      "why": "The day before yesterday is Tuesday; three days later is Friday.",
+      "scene": "Saki drove the last train. Her daughter turns six tomorrow—Friday.",
+      "clue": "Driver Saki's daughter turns 6 tomorrow",
+      "figure": [
+       "THU"
+      ]
+     }
+    }
+   ],
+   "finale": {
+    "answer": 0,
+    "ja": {
+     "q": "小箱の持ち主はだれ？",
+     "suspects": [
+      {
+       "name": "運転士の沙希",
+       "note": "終電を運転した。娘があした 6 歳"
+      },
+      {
+       "name": "花屋の陽向",
+       "note": "黄色いリボンを使う。19 時閉店"
+      },
+      {
+       "name": "会社員の健",
+       "note": "終電で帰る。子どもは 10 歳"
+      },
+      {
+       "name": "清掃の美和",
+       "note": "小箱を見つけて届けた"
+      }
+     ],
+     "truth": "持ち主は運転士の沙希。夕方、花屋町で黄色いリボンを結んでもらい、終電の乗務を終えて手袋を外したとき、ベンチに置き忘れた。小箱は次の朝、無事に沙希の手に戻った。"
+    },
+    "en": {
+     "q": "Whose box is it?",
+     "suspects": [
+      {
+       "name": "Saki, the driver",
+       "note": "Drove the last train. Daughter turns 6 tomorrow"
+      },
+      {
+       "name": "Hina, the florist",
+       "note": "Uses yellow ribbon. Closes at 7 p.m."
+      },
+      {
+       "name": "Ken, office worker",
+       "note": "Takes the last train. Child is 10"
+      },
+      {
+       "name": "Miwa, the cleaner",
+       "note": "Found the box and handed it in"
+      }
+     ],
+     "truth": "It was Saki's. She had the ribbon tied at the Flower St florist that afternoon, then set the box on a bench while pulling off her gloves after the last run—and forgot it. It was back in her hands the next morning."
+    }
+   }
+  },
+  {
+   "id": "c3",
+   "mark": "K",
+   "free": 3,
+   "ja": {
+    "line": "きりさめ線",
+    "title": "時刻表にない電車",
+    "intro": "「0 時 40 分の電車に乗った」と結衣は言う。でも時刻表の最終は 0 時 16 分。霧の夜、彼女が乗ったのは何だったのか。",
+    "stations": [
+     "霧ヶ丘",
+     "竹林",
+     "旧工場前",
+     "水門",
+     "信号所",
+     "鉄橋",
+     "古町",
+     "見晴",
+     "霧の浜",
+     "灯台通り"
+    ],
+    "terminal": "終点 霧笛"
+   },
+   "en": {
+    "line": "Mist Line",
+    "title": "The Train Not on the Timetable",
+    "intro": "“I caught the 0:40,” says Yui. But the last train on the timetable is 0:16. On a foggy night, what did she ride?",
+    "stations": [
+     "Mist Hill",
+     "Bamboo Grove",
+     "Old Mill",
+     "Floodgate",
+     "Signal Box",
+     "Iron Bridge",
+     "Old Town",
+     "Lookout",
+     "Mist Beach",
+     "Beacon Rd"
+    ],
+    "terminal": "Terminus: Foghorn"
+   },
+   "riddles": [
+    {
+     "kind": "pattern",
+     "answer": 2,
+     "ja": {
+      "q": "霧ヶ丘の夜の時刻表。決まりどおりなら、次は何時何分？",
+      "choices": [
+       "0:30",
+       "0:36",
+       "0:40",
+       "0:48"
+      ],
+      "hints": [
+       "となりどうしの差を見る。",
+       "差はいつも 24 分。",
+       "0:16 に 24 分を足す。"
+      ],
+      "why": "24 分おき。0:16 の次は 0:40。でも、時刻表には 0:40 はない。",
+      "scene": "結衣は「0:40 の電車で帰った」と話す。けれど時刻表の最終は 0:16。決まりどおりなら次は 0:40。でも、そんな電車はない。",
+      "clue": "時刻表の最終は 0:16。0:40 の電車はのっていない",
+      "figure": [
+       "23:28",
+       "23:52",
+       "0:16",
+       "?"
+      ]
+     },
+     "en": {
+      "q": "Mist Hill's night timetable. If the pattern held, when would the next train be?",
+      "choices": [
+       "0:30",
+       "0:36",
+       "0:40",
+       "0:48"
+      ],
+      "hints": [
+       "Look at the gaps.",
+       "The gap is always 24 minutes.",
+       "Add 24 minutes to 0:16."
+      ],
+      "why": "Every 24 minutes: after 0:16 comes 0:40. But there's no 0:40 on the timetable.",
+      "scene": "Yui says she rode home on the 0:40. But the timetable ends at 0:16. The pattern says 0:40 would come next—yet no such train exists.",
+      "clue": "The timetable ends at 0:16. No 0:40 is listed",
+      "figure": [
+       "23:28",
+       "23:52",
+       "0:16",
+       "?"
+      ]
+     }
+    },
+    {
+     "kind": "cipher",
+     "answer": 0,
+     "ja": {
+      "q": "電車の行き先表示に出ていた言葉を、五十音で 2 つうしろにずらした暗号。もとの言葉は？",
+      "choices": [
+       "なし",
+       "なみ",
+       "にし",
+       "ぬし"
+      ],
+      "hints": [
+       "1 文字ずつ、五十音で 2 つ前に戻す。",
+       "「ぬ」の 2 つ前は「な」。",
+       "「せ」の 2 つ前は「し」。"
+      ],
+      "why": "ぬ→な、せ→し。行き先は「なし」——何も出ていなかった。",
+      "scene": "結衣によると、その電車の行き先表示はまっ白だった。",
+      "clue": "行き先表示は何も出ていなかった",
+      "figure": [
+       "ぬ",
+       "せ"
+      ]
+     },
+     "en": {
+      "q": "What the destination sign showed, in a code shifted two letters forward. What does it say?",
+      "choices": [
+       "SIGN",
+       "SING",
+       "SNOW",
+       "SHIP"
+      ],
+      "hints": [
+       "Move each letter two steps back.",
+       "U becomes S, K becomes I.",
+       "I becomes G, P becomes N."
+      ],
+      "why": "UKIP shifted back two is SIGN—as in “NO SIGN”: the destination board was blank.",
+      "scene": "According to Yui, the train's destination sign was completely blank.",
+      "clue": "The destination sign was blank",
+      "figure": [
+       "U",
+       "K",
+       "I",
+       "P"
+      ]
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 0,
+     "ja": {
+      "q": "4 両の電車で、明かりがついていたのは 1 両だけ。「2 号車は暗かった」「明かりは奇数の号車」「3 号車ではない」。明かりがついていたのは？",
+      "choices": [
+       "1 号車",
+       "2 号車",
+       "3 号車",
+       "4 号車"
+      ],
+      "hints": [
+       "奇数の号車は 1 と 3。",
+       "3 号車ではない。",
+       "残るのは？"
+      ],
+      "why": "奇数は 1 と 3、3 ではないので 1 号車。",
+      "scene": "明かりがついていたのは先頭の 1 号車だけ。うしろの車両はまっ暗だった。",
+      "clue": "明かりは 1 号車だけ",
+      "figure": [
+       "▢",
+       "▢",
+       "▢",
+       "▢"
+      ]
+     },
+     "en": {
+      "q": "Of the 4 cars, only one had its lights on. “Car 2 was dark.” “The lit car had an odd number.” “It wasn't car 3.” Which car was lit?",
+      "choices": [
+       "Car 1",
+       "Car 2",
+       "Car 3",
+       "Car 4"
+      ],
+      "hints": [
+       "The odd cars are 1 and 3.",
+       "It wasn't car 3.",
+       "What's left?"
+      ],
+      "why": "Odd means 1 or 3; not 3, so car 1.",
+      "scene": "Only the front car was lit. The cars behind it were pitch dark.",
+      "clue": "Only car 1 was lit",
+      "figure": [
+       "▢",
+       "▢",
+       "▢",
+       "▢"
+      ]
+     }
+    },
+    {
+     "kind": "insight",
+     "answer": 0,
+     "ja": {
+      "q": "お客を乗せずに、車両を動かすためだけに走る電車。駅では何と表示される？",
+      "choices": [
+       "回送",
+       "急行",
+       "快速",
+       "臨時"
+      ],
+      "hints": [
+       "乗れない電車のこと。",
+       "車庫へ戻るときなどに走る。",
+       "「回って送る」と書く。"
+      ],
+      "why": "お客を乗せない電車は「回送」。",
+      "scene": "1 号車の運転席には、オレンジ色の上着の人。保線の作業員が着る上着だ。",
+      "clue": "運転席の人はオレンジの作業着",
+      "figure": []
+     },
+     "en": {
+      "q": "A train that runs without passengers, just to move itself somewhere, shows what on its sign?",
+      "choices": [
+       "Not in Service",
+       "Express",
+       "Rapid",
+       "Local"
+      ],
+      "hints": [
+       "It's a train you can't ride.",
+       "It often runs back to the depot.",
+       "It isn't serving passengers."
+      ],
+      "why": "Trains running without passengers show “Not in Service.”",
+      "scene": "In car 1's cab sat someone in an orange vest—the kind track crews wear.",
+      "clue": "The driver wore a track crew's orange vest",
+      "figure": []
+     }
+    },
+    {
+     "kind": "map",
+     "answer": 2,
+     "ja": {
+      "q": "A から D へ行く。同じ駅を 2 度通らない道は何通り？（線は A–B・A–C・B–C・B–D・C–D）",
+      "choices": [
+       "2 通り",
+       "3 通り",
+       "4 通り",
+       "5 通り"
+      ],
+      "hints": [
+       "A からまず B へ行くか、C へ行くか。",
+       "B からは、そのまま D へも、C を回ってから D へも行ける。",
+       "C から始めても同じように 2 通り。"
+      ],
+      "why": "A-B-D、A-B-C-D、A-C-D、A-C-B-D の 4 通り。",
+      "scene": "電車は水門の先で本線を外れ、地図にない「旧貨物駅」で止まった、と結衣は言う。",
+      "clue": "電車は地図にない旧貨物駅に止まった",
+      "figure": [
+       "A",
+       "─",
+       "B",
+       "│",
+       "╱",
+       "│",
+       "C",
+       "─",
+       "D"
+      ]
+     },
+     "en": {
+      "q": "Going from A to D without visiting any station twice—how many routes are there? (Lines: A–B, A–C, B–C, B–D, C–D)",
+      "choices": [
+       "2",
+       "3",
+       "4",
+       "5"
+      ],
+      "hints": [
+       "From A, go to B or to C first.",
+       "From B you can go straight to D, or via C.",
+       "Starting via C works the same way."
+      ],
+      "why": "A-B-D, A-B-C-D, A-C-D, A-C-B-D: 4 routes.",
+      "scene": "Yui says that past Floodgate the train left the main line and stopped at an “old freight station” that isn't on the map.",
+      "clue": "It stopped at an old freight station not on the map",
+      "figure": [
+       "A",
+       "─",
+       "B",
+       "│",
+       "╱",
+       "│",
+       "C",
+       "─",
+       "D"
+      ]
+     }
+    },
+    {
+     "kind": "figure",
+     "answer": 1,
+     "ja": {
+      "q": "改札からホームまで階段が 120 段。1 秒に 2 段のぼると、何秒かかる？",
+      "choices": [
+       "30 秒",
+       "60 秒",
+       "90 秒",
+       "120 秒"
+      ],
+      "hints": [
+       "1 秒で 2 段。",
+       "120 段を 2 段ずつ。",
+       "120 ÷ 2。"
+      ],
+      "why": "120 ÷ 2 ＝ 60 秒。0:38 に改札を通れば、0:40 には十分まにあう。",
+      "scene": "改札の記録には、結衣の IC カードが 0:38 に通った跡が残っていた。夢ではない。",
+      "clue": "改札の記録：0:38 に結衣が入場",
+      "figure": [
+       "120",
+       "÷",
+       "2"
+      ]
+     },
+     "en": {
+      "q": "There are 120 steps from the gate to the platform. Climbing 2 steps per second, how long does it take?",
+      "choices": [
+       "30 s",
+       "60 s",
+       "90 s",
+       "120 s"
+      ],
+      "hints": [
+       "2 steps each second.",
+       "120 steps, 2 at a time.",
+       "120 ÷ 2."
+      ],
+      "why": "120 ÷ 2 = 60 seconds. Tapping in at 0:38 leaves time to make a 0:40.",
+      "scene": "The gate log shows Yui's card tapped in at 0:38. It wasn't a dream.",
+      "clue": "Gate log: Yui tapped in at 0:38",
+      "figure": [
+       "120",
+       "÷",
+       "2"
+      ]
+     }
+    },
+    {
+     "kind": "logic",
+     "answer": 0,
+     "ja": {
+      "q": "作業員 3 人のうち、うそを言ったのは 1 人だけ。田中「森がオレンジの上着だ」 森「わたしはオレンジではない」 林「田中はうそつきだ」。うそを言ったのは？",
+      "choices": [
+       "田中",
+       "森",
+       "林",
+       "全員ほんとう"
+      ],
+      "hints": [
+       "田中がほんとうなら、森はオレンジ。すると森の言葉はうそ。",
+       "そのとき林の「田中はうそつき」もうそになり、うそが 2 人。",
+       "うそが 1 人になるのは、だれがうそのとき？"
+      ],
+      "why": "田中がうそなら、森はオレンジではなく森はほんとう、林の言葉もほんとう。うそは 1 人。",
+      "scene": "保線区の日誌に、えんぴつで「0:40 試運転」と書き足されていた。",
+      "clue": "保線区の日誌に「0:40 試運転」",
+      "figure": []
+     },
+     "en": {
+      "q": "Of three track workers, exactly one lied. Tanaka: “Mori wore the orange vest.” Mori: “I didn't.” Hayashi: “Tanaka is lying.” Who lied?",
+      "choices": [
+       "Tanaka",
+       "Mori",
+       "Hayashi",
+       "No one"
+      ],
+      "hints": [
+       "If Tanaka tells the truth, Mori wore orange—so Mori lied.",
+       "Then Hayashi's claim is also false: two liars.",
+       "Who has to be lying for only one lie?"
+      ],
+      "why": "If Tanaka lied, Mori didn't wear orange, so Mori and Hayashi both told the truth. One liar.",
+      "scene": "In the track crew's logbook, someone had pencilled in: “0:40 test run.”",
+      "clue": "Crew logbook: “0:40 test run”",
+      "figure": []
+     }
+    },
+    {
+     "kind": "pattern",
+     "answer": 1,
+     "ja": {
+      "q": "曜日の頭の文字が並んでいる。次は？",
+      "choices": [
+       "土",
+       "金",
+       "月",
+       "火"
+      ],
+      "hints": [
+       "日曜から順に並んでいる。",
+       "日・月・火・水・木……",
+       "木曜の次。"
+      ],
+      "why": "日・月・火・水・木の次は金。",
+      "scene": "先週から、鉄橋の近くで新しい線路を敷く工事をしていた。開通の前には、夜中に試しに電車を走らせる。",
+      "clue": "鉄橋の近くで新しい線路の工事。開通前は夜に試運転する",
+      "figure": [
+       "日",
+       "月",
+       "火",
+       "水",
+       "木",
+       "?"
+      ]
+     },
+     "en": {
+      "q": "These are the first letters of something in order. What comes next?",
+      "choices": [
+       "S",
+       "F",
+       "M",
+       "T"
+      ],
+      "hints": [
+       "Think of the days of the week.",
+       "Monday, Tuesday, Wednesday…",
+       "What comes after Friday?"
+      ],
+      "why": "Monday through Friday: M T W T F, then S for Saturday.",
+      "scene": "Since last week, crews had been laying new track near Iron Bridge. Before it opens, test trains run late at night.",
+      "clue": "New track near Iron Bridge; test runs happen late at night",
+      "figure": [
+       "M",
+       "T",
+       "W",
+       "T",
+       "F",
+       "?"
+      ]
+     }
+    },
+    {
+     "kind": "insight",
+     "answer": 0,
+     "ja": {
+      "q": "線は線でも、電車が走らない線は？",
+      "choices": [
+       "点線",
+       "本線",
+       "支線",
+       "路線"
+      ],
+      "hints": [
+       "本線・支線・路線は、どれも電車が走る。",
+       "紙の上にかく線のなかま。",
+       "「切り取り線」もこのかたち。"
+      ],
+      "why": "点線には電車は走らない。",
+      "scene": "結衣は少しうとうとしていたと打ち明けた。それでも、スマホに 1 号車の運転席の写真が残っていた。オレンジの上着が写っている。",
+      "clue": "結衣の写真に、オレンジの上着の運転士",
+      "figure": []
+     },
+     "en": {
+      "q": "What has many stations but never sees a train?",
+      "choices": [
+       "A radio",
+       "A subway",
+       "A bus stop",
+       "A depot"
+      ],
+      "hints": [
+       "Think of a different kind of “station.”",
+       "You can tune into these.",
+       "It plays music and news."
+      ],
+      "why": "A radio has many stations—and no trains.",
+      "scene": "Yui admits she was dozing. Still, her phone has a photo of car 1's cab—an orange vest is clearly visible.",
+      "clue": "Yui's photo shows a driver in an orange vest",
+      "figure": []
+     }
+    },
+    {
+     "kind": "pattern",
+     "answer": 0,
+     "ja": {
+      "q": "霧の中の信号が、ある決まりで光った。次は？",
+      "choices": [
+       "赤",
+       "青",
+       "黄",
+       "消える"
+      ],
+      "hints": [
+       "青と青のあいだの赤の数を数える。",
+       "赤は 1 つ、2 つ、3 つ……と増えている。",
+       "3 つの赤のあとに青。その次は？"
+      ],
+      "why": "赤の数が 1・2・3 と増え、青で区切る。青のあとは、また赤から。",
+      "scene": "鉄道会社のお知らせ。「鉄橋の新しい線路は月曜に開通します。今週は毎晩 0:40 に試運転を行いました」。",
+      "clue": "毎晩 0:40 に試運転をしていた（鉄道会社のお知らせ）",
+      "figure": [
+       "赤",
+       "青",
+       "赤",
+       "赤",
+       "青",
+       "赤",
+       "赤",
+       "赤",
+       "青",
+       "?"
+      ]
+     },
+     "en": {
+      "q": "A signal in the fog flashed in a pattern. What's next?",
+      "choices": [
+       "Red",
+       "Green",
+       "Yellow",
+       "Off"
+      ],
+      "hints": [
+       "Count the reds between the greens.",
+       "The reds go 1, 2, 3…",
+       "After three reds comes green. Then?"
+      ],
+      "why": "Reds grow 1, 2, 3, each run ended by green. After green comes red again.",
+      "scene": "A notice from the railway: “The new Iron Bridge track opens Monday. Test runs were held every night this week at 0:40.”",
+      "clue": "Test runs every night at 0:40 (railway notice)",
+      "figure": [
+       "R",
+       "G",
+       "R",
+       "R",
+       "G",
+       "R",
+       "R",
+       "R",
+       "G",
+       "?"
+      ]
+     }
+    }
+   ],
+   "finale": {
+    "answer": 2,
+    "ja": {
+     "q": "0 時 40 分の電車の正体は？",
+     "suspects": [
+      {
+       "name": "まぼろしの電車",
+       "note": "霧の夜にだけ出るといううわさ"
+      },
+      {
+       "name": "時刻表の印刷まちがい",
+       "note": "0:40 を書き忘れた？"
+      },
+      {
+       "name": "新しい線路の試運転",
+       "note": "回送・作業員が運転"
+      },
+      {
+       "name": "結衣の夢",
+       "note": "うとうとしていた"
+      }
+     ],
+     "truth": "正体は、新しい線路の試運転の電車。回送で行き先は出さず、明かりは運転する 1 号車だけ。開いたままのドアから、うとうとしていた結衣が乗ってしまった。改札の記録と写真が、夢ではないことを示していた。"
+    },
+    "en": {
+     "q": "What really was the 0:40 train?",
+     "suspects": [
+      {
+       "name": "A phantom train",
+       "note": "Rumored to appear on foggy nights"
+      },
+      {
+       "name": "A timetable misprint",
+       "note": "Did someone forget the 0:40?"
+      },
+      {
+       "name": "A test run on new track",
+       "note": "Not in service, crew driving"
+      },
+      {
+       "name": "Yui's dream",
+       "note": "She was dozing"
+      }
+     ],
+     "truth": "It was a test run for the new track. Running out of service, it showed no destination and lit only the driver's car. A door left open—and a sleepy Yui stepped aboard. The gate log and her photo proved it wasn't a dream."
+    }
+   }
+  }
+ ]
+}

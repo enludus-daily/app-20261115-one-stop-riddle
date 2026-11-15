@@ -1,42 +1,1267 @@
 {
   "sourceLanguage": "ja",
   "strings": {
-    "はじめる": {
+    "%@ Pro で開く": {
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Start"
+            "value": "%@, unlocks with Pro"
           }
         }
       }
     },
-    "リセット": {
+    "%@ · 2分でひと駅": {
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Reset"
+            "value": "%@ · one stop in 2 min"
           }
         }
       }
     },
-    "1 たす": {
+    "%@ から終点まで": {
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Add 1"
+            "value": "From %@ to the terminus"
           }
         }
       }
     },
-    "回数 %lld": {
+    "%@ 到着": {
+      "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Count %lld"
+            "value": "%@, arrived"
+          }
+        }
+      }
+    },
+    "%@ 定刻着": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, on time"
+          }
+        }
+      }
+    },
+    "%@ 次の駅": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, next stop"
+          }
+        }
+      }
+    },
+    "%@ 解決": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, solved"
+          }
+        }
+      }
+    },
+    "%d分遅れ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d min late"
+          }
+        }
+      }
+    },
+    "%d分遅れで到着": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrived %d min late"
+          }
+        }
+      }
+    },
+    "%d日つづけて乗車": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d-day streak"
+          }
+        }
+      }
+    },
+    "/ 10 駅": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "/ 10 stops"
+          }
+        }
+      }
+    },
+    "1 週間で 1 つの事件": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One case a week"
+          }
+        }
+      }
+    },
+    "1 駅解くごとに、物語の場面がひとつ開きます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Each stop you solve opens a new scene."
+          }
+        }
+      }
+    },
+    "1つにつき1分遅れ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+1 min each"
+          }
+        }
+      }
+    },
+    "3 つの事件をすべて解決": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All three cases closed"
+          }
+        }
+      }
+    },
+    "Pro にする ― %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get Pro ― %@"
+          }
+        }
+      }
+    },
+    "Pro を使っています。ありがとうございます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You have Pro. Thank you!"
+          }
+        }
+      }
+    },
+    "Pro を見る": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See Pro"
+          }
+        }
+      }
+    },
+    "「七番線の落とし物」「時刻表にない電車」を最後まで。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Finish “Lost on Platform 7” and “The Train Not on the Timetable.”"
+          }
+        }
+      }
+    },
+    "いまは購入できません": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not available right now"
+          }
+        }
+      }
+    },
+    "きまり": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pattern"
+          }
+        }
+      }
+    },
+    "この先の駅は、Pro で開きます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The next stops open with Pro."
+          }
+        }
+      }
+    },
+    "この先は Pro で": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue with Pro"
+          }
+        }
+      }
+    },
+    "この駅の場面": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This stop's scene"
+          }
+        }
+      }
+    },
+    "ぜんぶの駅に乗る。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ride every stop."
+          }
+        }
+      }
+    },
+    "そのほか": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More"
+          }
+        }
+      }
+    },
+    "だらだらスマホの代わりに、一駅 2 分の謎。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swap the endless scroll for a two-minute riddle."
+          }
+        }
+      }
+    },
+    "ちがうようです。手がかりをもう一度読んでみましょう。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Not quite. Read the clues again."
+          }
+        }
+      }
+    },
+    "つづけて乗った日": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Day streak"
+          }
+        }
+      }
+    },
+    "ひと駅なぞとき": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One Stop Riddles"
+          }
+        }
+      }
+    },
+    "ひらめき": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Insight"
+          }
+        }
+      }
+    },
+    "まちがい": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Misses"
+          }
+        }
+      }
+    },
+    "ヒント": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hints"
+          }
+        }
+      }
+    },
+    "ヒント %d / 3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hint %d / 3"
+          }
+        }
+      }
+    },
+    "ヒントの 3 段目": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The third hint"
+          }
+        }
+      }
+    },
+    "ヒントはここまで": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No more hints"
+          }
+        }
+      }
+    },
+    "一駅ごとに区切る": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One stop per ride"
+          }
+        }
+      }
+    },
+    "一駅で、ひとつの謎": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One stop, one riddle"
+          }
+        }
+      }
+    },
+    "乗り方": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Riding"
+          }
+        }
+      }
+    },
+    "乗車する": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Board"
+          }
+        }
+      }
+    },
+    "事件 %d · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case %d · %@"
+          }
+        }
+      }
+    },
+    "事件 1、解決。次の路線へ。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case one, closed. On to the next line."
+          }
+        }
+      }
+    },
+    "事件 2・3 の残り 14 駅と終点": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "14 more stops + 2 finales"
+          }
+        }
+      }
+    },
+    "事件ごとの最速タイムを、終点の結果に残します。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your fastest time per case, shown at each terminus."
+          }
+        }
+      }
+    },
+    "事件解決": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case closed"
+          }
+        }
+      }
+    },
+    "今日のこの便はここまで": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's it for this ride"
+          }
+        }
+      }
+    },
+    "今日はここまで。次の駅は %@ から": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's all for now. Next stop opens at %@"
+          }
+        }
+      }
+    },
+    "使い方をもう一度見る": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Show the intro again"
+          }
+        }
+      }
+    },
+    "値段は App Store の表示のとおり。通信なしで遊べ、広告もありません。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Price as shown by the App Store. Plays offline, no ads."
+          }
+        }
+      }
+    },
+    "共有": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share"
+          }
+        }
+      }
+    },
+    "効果音": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound effects"
+          }
+        }
+      }
+    },
+    "効果音は最初からオフ。通信せず、記録はこの iPhone の中だけに残ります。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound is off by default. No network—your records stay on this iPhone."
+          }
+        }
+      }
+    },
+    "図形": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Figure"
+          }
+        }
+      }
+    },
+    "夕の便": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evening ride"
+          }
+        }
+      }
+    },
+    "完了": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Done"
+          }
+        }
+      }
+    },
+    "定刻": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On time"
+          }
+        }
+      }
+    },
+    "定刻 %d": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d on time"
+          }
+        }
+      }
+    },
+    "定刻まであと %d 秒": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d seconds to arrive on time"
+          }
+        }
+      }
+    },
+    "定刻を %d 秒過ぎた": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d seconds past on-time"
+          }
+        }
+      }
+    },
+    "定刻率": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On-time rate"
+          }
+        }
+      }
+    },
+    "定刻着": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On time"
+          }
+        }
+      }
+    },
+    "手がかりから真相を選ぶ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pick the truth from your clues"
+          }
+        }
+      }
+    },
+    "承認を待っています。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waiting for approval."
+          }
+        }
+      }
+    },
+    "振動": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Haptics"
+          }
+        }
+      }
+    },
+    "推理の回数": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Guesses"
+          }
+        }
+      }
+    },
+    "日本語": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "English"
+          }
+        }
+      }
+    },
+    "暗号": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cipher"
+          }
+        }
+      }
+    },
+    "暗号・図形・論理・ひらめき・路線図。選んで押すだけ、片手で解けます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciphers, figures, logic, insight and maps. Just tap an answer—one hand is enough."
+          }
+        }
+      }
+    },
+    "最後のヒントは Pro で。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The last hint comes with Pro."
+          }
+        }
+      }
+    },
+    "最速の駅": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fastest stop"
+          }
+        }
+      }
+    },
+    "最速の駅の記録": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fastest-stop records"
+          }
+        }
+      }
+    },
+    "朝の便": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Morning ride"
+          }
+        }
+      }
+    },
+    "朝の便と夕の便に 1 駅ずつ。10 駅で手がかりがそろい、終点で真相を選びます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One stop each morning and evening. Ten stops gather the clues; at the terminus, you name the truth."
+          }
+        }
+      }
+    },
+    "朝の便（4:00〜）と夕の便（15:00〜）に 1 駅ずつ。オフにすると続けて乗れます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One new stop in the morning (from 4:00) and one in the evening (from 15:00). Turn off to ride on."
+          }
+        }
+      }
+    },
+    "次の駅": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next stop"
+          }
+        }
+      }
+    },
+    "次の駅は %@ から": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next stop opens at %@"
+          }
+        }
+      }
+    },
+    "次の駅へ ― %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ride to %@"
+          }
+        }
+      }
+    },
+    "次は %@「%@」": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next: %@ “%@”"
+          }
+        }
+      }
+    },
+    "次へ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next"
+          }
+        }
+      }
+    },
+    "無料 %d 駅 → Pro で 10 駅＋終点": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d free stops → all 10 + terminus with Pro"
+          }
+        }
+      }
+    },
+    "物語": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Story"
+          }
+        }
+      }
+    },
+    "物語がひとつ進みました": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The story moved one stop"
+          }
+        }
+      }
+    },
+    "物語がひとつ進んだ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A new scene opens"
+          }
+        }
+      }
+    },
+    "画像を共有": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share image"
+          }
+        }
+      }
+    },
+    "真相": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The truth"
+          }
+        }
+      }
+    },
+    "答え": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Answer"
+          }
+        }
+      }
+    },
+    "答えの手前まで導くヒント。どの駅でも使えます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A last nudge that takes you right to the edge of the answer, on every stop."
+          }
+        }
+      }
+    },
+    "答えの見えない路線図": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A spoiler-free route map"
+          }
+        }
+      }
+    },
+    "終点で真相を選ぶ": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose the truth at the terminus"
+          }
+        }
+      }
+    },
+    "終点へ ― %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To the terminus ― %@"
+          }
+        }
+      }
+    },
+    "練習 · 記録は変わりません": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Practice · records unchanged"
+          }
+        }
+      }
+    },
+    "解いた駅": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stops solved"
+          }
+        }
+      }
+    },
+    "解いた駅と定刻の数だけ。謎の答えは載りません。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Only your stops and on-time count—no answers."
+          }
+        }
+      }
+    },
+    "解いた駅を押すと、練習で解き直せます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tap a solved stop to replay it for practice."
+          }
+        }
+      }
+    },
+    "解くたびに、物語がひと駅進む。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every answer moves the story one stop."
+          }
+        }
+      }
+    },
+    "解決した事件 ― 真相を読む": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Case closed ― read the truth"
+          }
+        }
+      }
+    },
+    "記録": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Records"
+          }
+        }
+      }
+    },
+    "設定": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Settings"
+          }
+        }
+      }
+    },
+    "読み込み中…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading…"
+          }
+        }
+      }
+    },
+    "論理": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Logic"
+          }
+        }
+      }
+    },
+    "買い切り · 家族共有": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-time · Family Sharing"
+          }
+        }
+      }
+    },
+    "買い切り。一度買えば、家族も使えます。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One-time purchase. Family Sharing included."
+          }
+        }
+      }
+    },
+    "購入できませんでした。時間をおいてもう一度どうぞ。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The purchase didn't go through. Please try again later."
+          }
+        }
+      }
+    },
+    "購入を復元": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore purchase"
+          }
+        }
+      }
+    },
+    "路線図": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Map"
+          }
+        }
+      }
+    },
+    "路線図にもどる": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Back to the map"
+          }
+        }
+      }
+    },
+    "路線図を共有": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Share route map"
+          }
+        }
+      }
+    },
+    "通信しません。記録はこの iPhone の中だけに保存し、外に送りません。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No network. Your records stay on this iPhone and are never sent anywhere."
+          }
+        }
+      }
+    },
+    "通信できる所で開き直してください": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again with a connection"
+          }
+        }
+      }
+    },
+    "閉じる": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        }
+      }
+    },
+    "集めた手がかり": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your clues"
+          }
+        }
+      }
+    },
+    "電車の中でも、そっと。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quiet enough for any train."
+          }
+        }
+      }
+    },
+    "電車の中で鳴らないよう、最初はオフ。消音スイッチに従います。": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Off by default for quiet rides. Follows the silent switch."
+          }
+        }
+      }
+    },
+    "音と振動": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound & haptics"
+          }
+        }
+      }
+    },
+    "音なし・通信なし": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Silent and offline"
           }
         }
       }
