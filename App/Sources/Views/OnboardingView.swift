@@ -55,15 +55,15 @@ struct OnboardingView: View {
                                 .frame(width: i == page ? 22 : 8, height: 4)
                         }
                     }
-                    if page < pages.count - 1 {
-                        Button { advance() } label: { PrimaryButtonLabel(title: tr("次へ", "Next")) }
-                            .buttonStyle(PressStyle())
-                            .accessibilityIdentifier("main.next")
-                    } else {
-                        Button { model.press(); model.onboarded = true } label: { PrimaryButtonLabel(title: tr("乗車する", "Board")) }
-                            .buttonStyle(PressStyle())
-                            .accessibilityIdentifier("main.start")
+                    // 1 つのボタンを使い回す（差し替えると、UI テストで切り替えの途中を押せない判定になる）
+                    let last = page >= pages.count - 1
+                    Button {
+                        if last { model.press(); model.onboarded = true } else { advance() }
+                    } label: {
+                        PrimaryButtonLabel(title: last ? tr("乗車する", "Board") : tr("次へ", "Next"))
                     }
+                    .buttonStyle(PressStyle())
+                    .accessibilityIdentifier(last ? "main.start" : "main.next")
                 }
                 .padding(.horizontal, 28)
                 .padding(.bottom, 12)

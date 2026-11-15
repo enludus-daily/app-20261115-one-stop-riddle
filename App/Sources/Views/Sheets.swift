@@ -277,7 +277,7 @@ struct ShareView: View {
             NightBackground()
             VStack(spacing: 18) {
                 Eyebrow(text: tr("答えの見えない路線図", "A spoiler-free route map"), color: Theme.led)
-                    .padding(.top, 24)
+                    .padding(.top, 4)
                 card
                     .frame(width: 300, height: 400)
                     .shadow(color: .black.opacity(0.6), radius: 18, y: 10)
@@ -287,6 +287,21 @@ struct ShareView: View {
                 Spacer()
             }
             .padding(.horizontal, 20)
+            // 閉じるは右上（小さい画面でも、カードの下に押し出されない）
+            .safeAreaInset(edge: .top, spacing: 0) {
+                HStack {
+                    Spacer()
+                    Button { model.activeSheet = nil } label: {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 15, weight: .semibold))
+                            .frame(width: 44, height: 44)
+                    }
+                    .foregroundStyle(Theme.text)
+                    .accessibilityLabel(tr("閉じる", "Close"))
+                    .accessibilityIdentifier("main.closeShare")
+                }
+                .padding(.horizontal, 8)
+            }
             .safeAreaInset(edge: .bottom, spacing: 0) {
                 VStack(spacing: 8) {
                     if let image = render(card) {
@@ -295,11 +310,6 @@ struct ShareView: View {
                         }
                         .accessibilityIdentifier("main.shareImage")
                     }
-                    Button(tr("閉じる", "Close")) { model.activeSheet = nil }
-                        .font(Theme.gothic(14, .semibold))
-                        .foregroundStyle(Theme.dim)
-                        .frame(minHeight: 44)
-                        .accessibilityIdentifier("main.closeShare")
                 }
                 .padding(.horizontal, 20)
                 .padding(.bottom, 8)
