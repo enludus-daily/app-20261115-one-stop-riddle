@@ -131,10 +131,13 @@ struct JourneyTests {
 
     @Test func finaleCountsTriesUntilSolved() {
         var j = Journey()
-        #expect(!j.chooseSuspect(0, in: c1))
-        #expect(j.chooseSuspect(c1.finale.answer, in: c1))
+        let first = j.chooseSuspect(0, in: c1)
+        let second = j.chooseSuspect(c1.finale.answer, in: c1)
+        #expect(!first)
+        #expect(second)
         #expect(j.finales["c1"] == FinaleRecord(tries: 2, solved: true))
-        #expect(j.chooseSuspect(3, in: c1))
+        let again = j.chooseSuspect(3, in: c1)
+        #expect(again)
         #expect(j.finales["c1"]?.tries == 2)
     }
 
